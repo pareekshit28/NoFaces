@@ -9,7 +9,6 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'onBoarding',
       home: Container(
         child: SizedBox.fromSize(
           size: preferredSize,
