@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import './ui/OnBoarding.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(OnBoarding());
 }
 
 class MyApp extends StatelessWidget {
