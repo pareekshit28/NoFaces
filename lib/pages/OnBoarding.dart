@@ -9,7 +9,7 @@ class OnBoarding extends StatefulWidget {
 class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
-    const curveHeight = 0.0;
+    const curveHeight = 60.0;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
