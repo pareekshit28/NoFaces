@@ -22,10 +22,12 @@ class LoginScreen extends StatelessWidget {
           children: [
             Expanded(child: SizedBox()),
             Text(
-              "NoFaces",
+              "No Faces",
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
+                  // fontWeight: FontWeight.bold,
+                  letterSpacing: 2.5,
+                  wordSpacing: -5,
+                  fontSize: 35,
                   color: Colors.white),
             ),
             Expanded(child: SizedBox()),
