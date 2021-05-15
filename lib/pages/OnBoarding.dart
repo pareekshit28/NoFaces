@@ -11,27 +11,135 @@ class _OnBoardingState extends State<OnBoarding> {
   Widget build(BuildContext context) {
     const curveHeight = 60.0;
     return Scaffold(
-        appBar: AppBar(
-      flexibleSpace: Container(
-        decoration: new ShapeDecoration(
-          shape: const MyShapeBorder(curveHeight),
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: <Color>[
-              Color.fromRGBO(228, 36, 239, 1),
-              Color.fromRGBO(117, 121, 255, 1)
-            ],
+      appBar: AppBar(
+        toolbarHeight: 50,
+        flexibleSpace: Container(
+          child: Align(
+            alignment: Alignment(0, 1.5),
+            child: Text(
+              'Lets Get on Board',
+              style: TextStyle(
+                  color: Colors.white,
+                  letterSpacing: 1.3,
+                  wordSpacing: -2,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 28.0),
+            ),
+          ),
+          decoration: new ShapeDecoration(
+            shape: const MyShapeBorder(curveHeight),
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                Color.fromRGBO(178, 36, 239, 1),
+                Color.fromRGBO(117, 121, 255, 1)
+              ],
+            ),
           ),
         ),
       ),
-    )
-        // body: new Column(
-        //   children: <Widget>[
-        //     new GradientAppBar("Let's Get on  Board !"),
-        //   ],
-        // ),
-        );
+      backgroundColor: Color.fromRGBO(251, 251, 251, 1),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(15, curveHeight + 30, 15, 0),
+        child: Column(
+          children: [
+            CircleAvatar(
+                radius: 80, backgroundColor: Color.fromRGBO(117, 121, 255, 1)),
+            SizedBox(
+              height: 80,
+            ),
+            TextField(
+              cursorColor: Colors.purple,
+              style:
+                  TextStyle(color: Color.fromRGBO(42, 42, 42, 1), fontSize: 22),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                ),
+                labelText: 'Name',
+                labelStyle: TextStyle(
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Color.fromRGBO(178, 36, 239, 1), width: 1.25),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromRGBO(157, 171, 255, 1)),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            TextField(
+              cursorColor: Colors.purple,
+              style:
+                  TextStyle(color: Color.fromRGBO(42, 42, 42, 1), fontSize: 22),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.face,
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                ),
+                labelText: 'Gender',
+                labelStyle: TextStyle(
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Color.fromRGBO(178, 36, 239, 1), width: 1.25),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromRGBO(157, 171, 255, 1)),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            TextField(
+              cursorColor: Colors.purple,
+              style:
+                  TextStyle(color: Color.fromRGBO(42, 42, 42, 1), fontSize: 22),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.place,
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                ),
+                labelText: 'Place',
+                labelStyle: TextStyle(
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 20,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Color.fromRGBO(178, 36, 239, 1), width: 1.25),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromRGBO(157, 171, 255, 1)),
+                    borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -84,7 +192,7 @@ class MyShapeBorder extends ContinuousRectangleBorder {
 //                             begin: Alignment(-1, 1),
 //                             end: Alignment(1, 1),
 //                             colors: <Color>[
-//                               Color.fromRGBO(228, 36, 239, 1),
+//                               Color.fromRGBO(178, 36, 239, 1),
 //                               Colors.blue[600]
 //                             ],
 //                             tileMode: TileMode.clamp),

@@ -10,8 +10,8 @@ class LoginScreen extends StatelessWidget {
               begin: Alignment(-1, 1),
               end: Alignment(1, 1),
               colors: <Color>[
-                Color.fromRGBO(228, 36, 239, 1),
-                Colors.blue[600]
+                Color.fromRGBO(178, 36, 239, 1),
+                Color.fromRGBO(117, 121, 255, 1)
               ],
               tileMode: TileMode.clamp),
         ),
