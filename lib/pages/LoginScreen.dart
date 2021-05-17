@@ -10,8 +10,8 @@ class LoginScreen extends StatelessWidget {
               begin: Alignment(-1, 1),
               end: Alignment(1, 1),
               colors: <Color>[
-                Color.fromRGBO(228, 36, 239, 1),
-                Colors.blue[600]
+                Color.fromRGBO(178, 36, 239, 1),
+                Color.fromRGBO(117, 121, 255, 1)
               ],
               tileMode: TileMode.clamp),
         ),
@@ -22,10 +22,12 @@ class LoginScreen extends StatelessWidget {
           children: [
             Expanded(child: SizedBox()),
             Text(
-              "NoFaces",
+              "No Faces",
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
+                  // fontWeight: FontWeight.bold,
+                  letterSpacing: 2.5,
+                  wordSpacing: -5,
+                  fontSize: 35,
                   color: Colors.white),
             ),
             Expanded(child: SizedBox()),
