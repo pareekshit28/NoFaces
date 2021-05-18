@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class OnBoarding extends StatefulWidget {
   final List<DropdownMenuItem<String>> _genderList = [
@@ -21,14 +22,6 @@ class OnBoarding extends StatefulWidget {
     DropdownMenuItem(
       child: Text("Bigender"),
       value: "Bigender",
-    ),
-    DropdownMenuItem(
-      child: Text("Cis Man"),
-      value: "Cis Man",
-    ),
-    DropdownMenuItem(
-      child: Text("Cis Woman"),
-      value: "Cis Woman",
     ),
     DropdownMenuItem(
       child: Text("Genderfluid"),
@@ -182,91 +175,245 @@ class OnBoarding extends StatefulWidget {
 class _OnBoardingState extends State<OnBoarding> {
   String _gender;
   String _orientation;
+
   @override
   Widget build(BuildContext context) {
+    const curveHeight = 60.0;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Additional Details"),
+        toolbarHeight: 50,
+        flexibleSpace: Container(
+          child: Align(
+            alignment: Alignment(0, 1.5),
+            child: Text(
+              "Let's Get on Board!",
+              style: TextStyle(
+                  color: Colors.white,
+                  letterSpacing: 1.3,
+                  wordSpacing: -2,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 28.0),
+            ),
+          ),
+          decoration: new ShapeDecoration(
+            shape: const MyShapeBorder(curveHeight),
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                Color.fromRGBO(178, 36, 239, 1),
+                Color.fromRGBO(117, 121, 255, 1)
+              ],
+            ),
+          ),
+        ),
       ),
-      floatingActionButton:
-          FloatingActionButton.extended(onPressed: () {}, label: Text("Next")),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text("Next"),
+        backgroundColor: Color.fromRGBO(117, 121, 255, 1),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 100),
           child: Column(
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("Full Name"),
-                  TextField(),
+                  CircleAvatar(
+                      radius: 80,
+                      backgroundColor: Color.fromRGBO(117, 121, 255, 0.7)),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  TextField(
+                    cursorColor: Colors.purple,
+                    style: TextStyle(color: Colors.grey[800], fontSize: 22),
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: Color.fromRGBO(157, 171, 255, 1),
+                      ),
+                      labelText: 'Name',
+                      labelStyle: TextStyle(
+                        color: Color.fromRGBO(157, 171, 255, 1),
+                        fontWeight: FontWeight.w300,
+                        fontSize: 20,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Color.fromRGBO(178, 36, 239, 1),
+                            width: 1.25),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(157, 171, 255, 1)),
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Age"),
-                        TextField(),
-                      ],
+                    flex: 5,
+                    child: TextField(
+                      cursorColor: Colors.purple,
+                      style: TextStyle(color: Colors.grey[800], fontSize: 22),
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.location_city,
+                          color: Color.fromRGBO(157, 171, 255, 1),
+                        ),
+                        labelText: 'City',
+                        labelStyle: TextStyle(
+                          color: Color.fromRGBO(157, 171, 255, 1),
+                          fontWeight: FontWeight.w300,
+                          fontSize: 20,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(178, 36, 239, 1),
+                              width: 1.25),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromRGBO(157, 171, 255, 1)),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                     ),
                   ),
                   SizedBox(
-                    width: 20,
+                    width: 15,
                   ),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("City"),
-                        TextField(),
-                      ],
+                    flex: 3,
+                    child: TextField(
+                      cursorColor: Colors.purple,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: Colors.grey[800], fontSize: 22),
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.accessibility_new,
+                          color: Color.fromRGBO(157, 171, 255, 1),
+                        ),
+                        labelText: 'Age',
+                        labelStyle: TextStyle(
+                          color: Color.fromRGBO(157, 171, 255, 1),
+                          fontWeight: FontWeight.w300,
+                          fontSize: 20,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(178, 36, 239, 1),
+                              width: 1.25),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromRGBO(157, 171, 255, 1)),
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
                     ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Gender"),
-                  DropdownButton(
-                    items: widget._genderList,
-                    value: _gender,
-                    isExpanded: true,
-                    onChanged: (value) {
-                      setState(() {
-                        _gender = value;
-                      });
-                    },
-                  )
-                ],
+              DropdownButtonFormField(
+                icon: Icon(
+                  Icons.arrow_drop_down_rounded,
+                  size: 30,
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                ),
+                items: widget._genderList,
+                isExpanded: true,
+                onChanged: (value) {
+                  setState(() {
+                    _gender = value;
+                  });
+                },
+                isDense: true,
+                itemHeight: 200,
+                style: TextStyle(color: Colors.grey[800], fontSize: 22),
+                decoration: InputDecoration(
+                  prefixIcon: SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SvgPicture.asset(
+                        'assets/icons/gender.svg',
+                        color: Color.fromRGBO(157, 171, 255, 1),
+                        height: 50,
+                        width: 50,
+                      ),
+                    ),
+                  ),
+                  labelText: 'Gender',
+                  labelStyle: TextStyle(
+                    color: Color.fromRGBO(157, 171, 255, 1),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 20,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromRGBO(178, 36, 239, 1), width: 1.25),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(157, 171, 255, 1)),
+                      borderRadius: BorderRadius.circular(10)),
+                ),
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Orientation"),
-                  DropdownButton(
-                    items: widget._orientationList,
-                    value: _orientation,
-                    isExpanded: true,
-                    onChanged: (value) {
-                      setState(() {
-                        _orientation = value;
-                      });
-                    },
-                  )
-                ],
+              DropdownButtonFormField(
+                items: widget._orientationList,
+                value: _orientation,
+                isExpanded: true,
+                onChanged: (value) {
+                  setState(() {
+                    _orientation = value;
+                  });
+                },
+                icon: Icon(
+                  Icons.arrow_drop_down_rounded,
+                  size: 30,
+                  color: Color.fromRGBO(157, 171, 255, 1),
+                ),
+                style: TextStyle(color: Colors.grey[800], fontSize: 22),
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.face_outlined,
+                    color: Color.fromRGBO(157, 171, 255, 1),
+                  ),
+                  labelText: 'Orientation',
+                  labelStyle: TextStyle(
+                    color: Color.fromRGBO(157, 171, 255, 1),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 20,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Color.fromRGBO(178, 36, 239, 1), width: 1.25),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color.fromRGBO(157, 171, 255, 1)),
+                      borderRadius: BorderRadius.circular(10)),
+                ),
               ),
             ],
           ),
@@ -274,4 +421,21 @@ class _OnBoardingState extends State<OnBoarding> {
       ),
     );
   }
+}
+
+class MyShapeBorder extends ContinuousRectangleBorder {
+  const MyShapeBorder(this.curveHeight);
+  final double curveHeight;
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection textDirection}) => Path()
+    ..lineTo(0, rect.size.height)
+    ..quadraticBezierTo(
+      rect.size.width / 2,
+      rect.size.height + curveHeight * 2,
+      rect.size.width,
+      rect.size.height,
+    )
+    ..lineTo(rect.size.width, 0)
+    ..close();
 }
