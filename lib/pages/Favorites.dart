@@ -26,10 +26,13 @@ class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      shrinkWrap: true,
       itemCount: widget.list.length,
       itemBuilder: (context, index) => InkWell(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 14.0, top: 7, bottom: 7),
+        child: Container(
+          padding: index == 0
+              ? EdgeInsets.only(left: 14.0, top: 70, bottom: 7)
+              : EdgeInsets.only(left: 14.0, top: 7, bottom: 7),
           child: Row(children: [
             CircleAvatar(
               radius: 27,

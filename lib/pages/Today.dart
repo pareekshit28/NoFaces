@@ -20,7 +20,73 @@ class Today extends StatefulWidget {
       "st": "Hey Aniston 👋",
       "dp":
           "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    }
+    },
+    {
+      "name": "Matt Leblanc",
+      "st": "How you doin?",
+      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "st": "Hey Aniston 👋",
+      "dp":
+          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
+    },
+    {
+      "name": "Matt Leblanc",
+      "st": "How you doin?",
+      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "st": "Hey Aniston 👋",
+      "dp":
+          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
+    },
+    {
+      "name": "Matt Leblanc",
+      "st": "How you doin?",
+      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "st": "Hey Aniston 👋",
+      "dp":
+          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
+    },
+    {
+      "name": "Matt Leblanc",
+      "st": "How you doin?",
+      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "st": "Hey Aniston 👋",
+      "dp":
+          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
+    },
+    {
+      "name": "Matt Leblanc",
+      "st": "How you doin?",
+      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "st": "Hey Aniston 👋",
+      "dp":
+          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
+    },
+    {
+      "name": "Matt Leblanc",
+      "st": "How you doin?",
+      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "st": "Hey Aniston 👋",
+      "dp":
+          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
+    },
   ];
 
   @override
@@ -33,8 +99,10 @@ class _TodayState extends State<Today> {
     return ListView.separated(
       itemCount: widget.list.length,
       itemBuilder: (context, index) => InkWell(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 14.0, top: 7, bottom: 7),
+        child: Container(
+          padding: index == 0
+              ? EdgeInsets.only(left: 14.0, top: 60, bottom: 7)
+              : EdgeInsets.only(left: 14.0, top: 7, bottom: 7),
           child: Row(children: [
             CircleAvatar(
               radius: 27,
