@@ -16,12 +16,18 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         elevation: 10,
         title: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            backgroundImage: NetworkImage(widget.dp),
+          leading: InkWell(
+            onTap: () => Navigator.of(context),
+            child: CircleAvatar(
+              backgroundColor: Colors.transparent,
+              backgroundImage: NetworkImage(widget.dp),
+            ),
           ),
           title: Text(widget.name),
-          subtitle: Text("Online"),
+          subtitle: Text(
+            "Online",
+            style: TextStyle(color: Colors.black),
+          ),
         ),
         actions: [
           Padding(
@@ -55,16 +61,21 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                           decoration: BoxDecoration(
                               color: index % 2 == 0 ? Colors.grey : Colors.blue,
-                              borderRadius: BorderRadius.circular(20)),
+                              borderRadius: BorderRadius.circular(8)),
                           child: Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Text(
-                                "Hellooooooooooooooooooooooooooooooooooooooooooooooooo"),
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Text("Hellooooooooooooooooooooooooooooooo"),
+                                Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: Text(
+                                      "15:04",
+                                      style: TextStyle(fontSize: 12),
+                                    )),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("15:04"),
                         ),
                         index == 0
                             ? SizedBox(

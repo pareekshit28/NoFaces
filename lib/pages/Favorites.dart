@@ -25,37 +25,53 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 12,
-      ),
-      child: ListView.separated(
-        itemCount: widget.list.length,
-        itemBuilder: (context, index) => ListTile(
-          horizontalTitleGap: 0,
-          leading: CircleAvatar(
-            backgroundColor: Colors.transparent,
-            radius: 40,
-            backgroundImage: NetworkImage(
-              widget.list[index]["dp"],
+    return ListView.separated(
+      itemCount: widget.list.length,
+      itemBuilder: (context, index) => InkWell(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 14.0, top: 7, bottom: 7),
+          child: Row(children: [
+            CircleAvatar(
+              radius: 27,
+              backgroundColor: Colors.transparent,
+              backgroundImage: NetworkImage(
+                widget.list[index]["dp"],
+              ),
             ),
-          ),
-          title: Text(widget.list[index]["name"]),
-          subtitle: Text(widget.list[index]["st"]),
-          onTap: () {
-            Navigator.of(context).push(CupertinoPageRoute(
-                builder: (context) => ChatScreen(
-                      name: widget.list[index]["name"],
-                      dp: widget.list[index]["dp"],
-                    )));
-          },
+            SizedBox(width: 14),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.list[index]["name"],
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                  ),
+                  Text(
+                    widget.list[index]["st"],
+                    maxLines: 2,
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                ],
+              ),
+            ),
+          ]),
         ),
-        separatorBuilder: (BuildContext context, int index) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Divider(
-            color: Colors.grey,
-          ),
-        ),
+        onTap: () {
+          Navigator.of(context).push(CupertinoPageRoute(
+              builder: (context) => ChatScreen(
+                    name: widget.list[index]["name"],
+                    dp: widget.list[index]["dp"],
+                  )));
+        },
+      ),
+      separatorBuilder: (BuildContext context, int index) => Divider(
+        color: Colors.grey,
+        indent: 88,
+        endIndent: 10,
+        height: 0,
       ),
     );
   }
