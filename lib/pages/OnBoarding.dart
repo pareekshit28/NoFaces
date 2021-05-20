@@ -215,8 +215,19 @@ class _OnBoardingState extends State<OnBoarding> {
         backgroundColor: Color.fromRGBO(117, 121, 255, 1),
       ),
       body: SingleChildScrollView(
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 100),
+          decoration: new ShapeDecoration(
+            shape: const MyShapeBorder(curveHeight),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[
+                Color.fromRGBO(233, 206, 247, 1),
+                Color.fromRGBO(239, 240, 255, 1)
+              ],
+            ),
+          ),
           child: Column(
             children: [
               Column(
@@ -236,12 +247,15 @@ class _OnBoardingState extends State<OnBoarding> {
                         Icons.person,
                         color: Color.fromRGBO(157, 171, 255, 1),
                       ),
+                      fillColor: Colors.white,
+                      filled: true,
                       labelText: 'Name',
                       labelStyle: TextStyle(
                         color: Color.fromRGBO(157, 171, 255, 1),
                         fontWeight: FontWeight.w300,
                         fontSize: 20,
                       ),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Color.fromRGBO(178, 36, 239, 1),
@@ -262,16 +276,20 @@ class _OnBoardingState extends State<OnBoarding> {
               Row(
                 children: [
                   Expanded(
-                    flex: 5,
+                    flex: 3,
                     child: TextField(
                       cursorColor: Colors.purple,
+                      keyboardType: TextInputType.number,
                       style: TextStyle(color: Colors.grey[800], fontSize: 22),
                       decoration: InputDecoration(
                         prefixIcon: Icon(
-                          Icons.location_city,
+                          Icons.accessibility_new,
                           color: Color.fromRGBO(157, 171, 255, 1),
                         ),
-                        labelText: 'City',
+                        fillColor: Colors.white,
+                        filled: true,
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        labelText: 'Age',
                         labelStyle: TextStyle(
                           color: Color.fromRGBO(157, 171, 255, 1),
                           fontWeight: FontWeight.w300,
@@ -294,17 +312,19 @@ class _OnBoardingState extends State<OnBoarding> {
                     width: 15,
                   ),
                   Expanded(
-                    flex: 3,
+                    flex: 5,
                     child: TextField(
                       cursorColor: Colors.purple,
-                      keyboardType: TextInputType.number,
                       style: TextStyle(color: Colors.grey[800], fontSize: 22),
                       decoration: InputDecoration(
                         prefixIcon: Icon(
-                          Icons.accessibility_new,
+                          Icons.location_city,
                           color: Color.fromRGBO(157, 171, 255, 1),
                         ),
-                        labelText: 'Age',
+                        fillColor: Colors.white,
+                        filled: true,
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        labelText: 'City',
                         labelStyle: TextStyle(
                           color: Color.fromRGBO(157, 171, 255, 1),
                           fontWeight: FontWeight.w300,
@@ -358,6 +378,9 @@ class _OnBoardingState extends State<OnBoarding> {
                       ),
                     ),
                   ),
+                  fillColor: Colors.white,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  filled: true,
                   labelText: 'Gender',
                   labelStyle: TextStyle(
                     color: Color.fromRGBO(157, 171, 255, 1),
@@ -395,9 +418,12 @@ class _OnBoardingState extends State<OnBoarding> {
                 style: TextStyle(color: Colors.grey[800], fontSize: 22),
                 decoration: InputDecoration(
                   prefixIcon: Icon(
-                    Icons.face_outlined,
+                    Icons.face,
                     color: Color.fromRGBO(157, 171, 255, 1),
                   ),
+                  fillColor: Colors.white,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  filled: true,
                   labelText: 'Orientation',
                   labelStyle: TextStyle(
                     color: Color.fromRGBO(157, 171, 255, 1),
