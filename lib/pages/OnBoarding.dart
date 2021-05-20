@@ -355,6 +355,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   color: Color.fromRGBO(157, 171, 255, 1),
                 ),
                 items: widget._genderList,
+                value: _gender,
                 isExpanded: true,
                 onChanged: (value) {
                   setState(() {
