@@ -72,7 +72,7 @@ class _FavoritesState extends State<Favorites> {
       ),
       separatorBuilder: (BuildContext context, int index) => Divider(
         color: Colors.grey,
-        indent: 88,
+        indent: 82,
         endIndent: 10,
         height: 0,
       ),

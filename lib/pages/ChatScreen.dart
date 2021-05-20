@@ -14,6 +14,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(117, 121, 255, 0.7),
         elevation: 10,
         title: ListTile(
           leading: InkWell(
@@ -44,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Stack(children: [
         ListView.builder(
             reverse: true,
-            itemCount: 10,
+            itemCount: 20,
             itemBuilder: (context, index) => Container(
                   margin: EdgeInsets.only(top: 12, right: 12, left: 12),
                   child: Align(
@@ -60,7 +61,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             maxWidth: MediaQuery.of(context).size.width * 0.8,
                           ),
                           decoration: BoxDecoration(
-                              color: index % 2 == 0 ? Colors.grey : Colors.blue,
+                              color: index % 2 == 0
+                                  ? Colors.grey
+                                  : Color.fromRGBO(117, 121, 255, 0.7),
                               borderRadius: BorderRadius.circular(8)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

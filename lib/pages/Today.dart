@@ -10,83 +10,6 @@ class Today extends StatefulWidget {
       "dp":
           "https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/p-friends-david-schwimmer.jpg"
     },
-    {
-      "name": "Matt Leblanc",
-      "st": "How you doin?",
-      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
-    },
-    {
-      "name": "Brad Pitt",
-      "st": "Hey Aniston 👋",
-      "dp":
-          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    },
-    {
-      "name": "Matt Leblanc",
-      "st": "How you doin?",
-      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
-    },
-    {
-      "name": "Brad Pitt",
-      "st": "Hey Aniston 👋",
-      "dp":
-          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    },
-    {
-      "name": "Matt Leblanc",
-      "st": "How you doin?",
-      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
-    },
-    {
-      "name": "Brad Pitt",
-      "st": "Hey Aniston 👋",
-      "dp":
-          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    },
-    {
-      "name": "Matt Leblanc",
-      "st": "How you doin?",
-      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
-    },
-    {
-      "name": "Brad Pitt",
-      "st": "Hey Aniston 👋",
-      "dp":
-          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    },
-    {
-      "name": "Matt Leblanc",
-      "st": "How you doin?",
-      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
-    },
-    {
-      "name": "Brad Pitt",
-      "st": "Hey Aniston 👋",
-      "dp":
-          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    },
-    {
-      "name": "Matt Leblanc",
-      "st": "How you doin?",
-      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
-    },
-    {
-      "name": "Brad Pitt",
-      "st": "Hey Aniston 👋",
-      "dp":
-          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    },
-    {
-      "name": "Matt Leblanc",
-      "st": "How you doin?",
-      "dp": "https://1tb.favim.com/preview/7/770/7706/77063/7706317.jpg"
-    },
-    {
-      "name": "Brad Pitt",
-      "st": "Hey Aniston 👋",
-      "dp":
-          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    },
   ];
 
   @override
@@ -96,54 +19,96 @@ class Today extends StatefulWidget {
 class _TodayState extends State<Today> {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: widget.list.length,
-      itemBuilder: (context, index) => InkWell(
-        child: Container(
-          padding: index == 0
-              ? EdgeInsets.only(left: 14.0, top: 60, bottom: 7)
-              : EdgeInsets.only(left: 14.0, top: 7, bottom: 7),
-          child: Row(children: [
-            CircleAvatar(
-              radius: 27,
-              backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage(
-                widget.list[index]["dp"],
-              ),
-            ),
-            SizedBox(width: 14),
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.list[index]["name"],
-                    style: TextStyle(
-                      fontSize: 17,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 72.0),
+            child: Text("Today's Recommendation"),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                right: 28.0, left: 28, top: 12, bottom: 28),
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              elevation: 18,
+              shadowColor: Color.fromRGBO(117, 121, 255, 1),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Color.fromRGBO(117, 121, 255, 0.7),
+                      backgroundImage: NetworkImage(widget.list[0]["dp"]),
+                      radius: 50,
                     ),
-                  ),
-                  Text(
-                    widget.list[index]["st"],
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ],
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "David Schwimmer",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text("54, New York"),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "My Summary",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    MaterialButton(
+                      elevation: 5,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (context) => ChatScreen(
+                                  name: widget.list[0]["name"],
+                                  dp: widget.list[0]["dp"],
+                                )));
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28)),
+                      color: Color.fromRGBO(117, 121, 255, 1),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Chat",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400)),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(CupertinoIcons.arrow_right),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ]),
-        ),
-        onTap: () {
-          Navigator.of(context).push(CupertinoPageRoute(
-              builder: (context) => ChatScreen(
-                    name: widget.list[index]["name"],
-                    dp: widget.list[index]["dp"],
-                  )));
-        },
-      ),
-      separatorBuilder: (BuildContext context, int index) => Divider(
-        color: Colors.grey,
-        indent: 88,
-        endIndent: 10,
-        height: 0,
+          ),
+        ],
       ),
     );
   }
