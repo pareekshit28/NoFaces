@@ -15,7 +15,19 @@ class Favorites extends StatefulWidget {
       "st": "Hey Aniston 👋",
       "dp":
           "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
-    }
+    },
+    {
+      "name": "David Schwimmer",
+      "st": "We were on a break!",
+      "dp":
+          "https://a1cf74336522e87f135f-2f21ace9a6cf0052456644b80fa06d4f.ssl.cf2.rackcdn.com/images/characters/p-friends-david-schwimmer.jpg"
+    },
+    {
+      "name": "Brad Pitt",
+      "st": "Hey Aniston 👋",
+      "dp":
+          "https://static.wikia.nocookie.net/friends/images/b/b4/Will_Colbert.png/revision/latest?cb=20180427204904"
+    },
   ];
 
   @override
@@ -74,7 +86,7 @@ class _FavoritesState extends State<Favorites> {
         color: Colors.grey,
         indent: 82,
         endIndent: 10,
-        height: 0,
+        height: 20,
       ),
     );
   }

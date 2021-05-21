@@ -40,7 +40,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 onPressed: () {}),
           )
         ],
-        leadingWidth: 10,
+        // leadingWidth: 20,
       ),
       body: Stack(children: [
         ListView.builder(
@@ -69,7 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Text("Hellooooooooooooooooooooooooooooooo"),
+                                Text("Helloooooooooooo"),
                                 Align(
                                     alignment: Alignment.bottomRight,
                                     child: Text(

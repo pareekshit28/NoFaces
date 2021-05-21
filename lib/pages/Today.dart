@@ -23,16 +23,22 @@ class _TodayState extends State<Today> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 72.0),
-            child: Text("Today's Recommendation"),
+            padding: const EdgeInsets.only(top: 92.0),
+            child: Text("Today's Pick",
+                style: TextStyle(
+                    color: Colors.blue[700],
+                    letterSpacing: 1.3,
+                    wordSpacing: -2,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 28.0)),
           ),
           Padding(
             padding: const EdgeInsets.only(
-                right: 28.0, left: 28, top: 12, bottom: 28),
+                right: 28.0, left: 28, top: 32, bottom: 28),
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
-              elevation: 18,
+              elevation: 7,
               shadowColor: Color.fromRGBO(117, 121, 255, 1),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
