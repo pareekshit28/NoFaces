@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'No Faces',
       theme: ThemeData(primarySwatch: Colors.grey),
-      home: HomeScreen(),
+      home: OnBoarding(),
     );
   }
 }

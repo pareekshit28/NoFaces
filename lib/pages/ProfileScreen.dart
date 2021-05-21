@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:no_faces/pages/InterestsScreen.dart';
 import 'package:no_faces/pages/OnBoarding.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -58,6 +59,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ]),
               ),
             ),
+            ListTile(
+              title: Text("Interests"),
+              trailing: Icon(CupertinoIcons.arrow_right),
+              onTap: () => Navigator.of(context).push(
+                  CupertinoPageRoute(builder: (context) => InterestsScreen())),
+            )
           ],
         ),
       ),

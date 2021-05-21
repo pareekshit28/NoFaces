@@ -442,6 +442,13 @@ class _OnBoardingState extends State<OnBoarding> {
                       borderRadius: BorderRadius.circular(10)),
                 ),
               ),
+              SizedBox(
+                height: 30,
+              ),
+              TextField(
+                maxLines: 10,
+                keyboardType: TextInputType.multiline,
+              )
             ],
           ),
         ),
