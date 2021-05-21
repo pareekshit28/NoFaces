@@ -92,7 +92,7 @@ class _ChatScreenState extends State<ChatScreen> {
         Align(
           alignment: Alignment.bottomLeft,
           child: Container(
-            height: 80,
+            constraints: BoxConstraints(maxHeight: 150, minHeight: 50),
             margin: EdgeInsets.only(top: 8),
             color: Colors.white,
             child: Row(
@@ -100,7 +100,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 Expanded(
                     child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: TextField(),
+                  child: TextField(
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                  ),
                 )),
                 MaterialButton(
                   onPressed: () {},
