@@ -38,7 +38,7 @@ class _TodayState extends State<Today> {
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
-              elevation: 7,
+              elevation: 5,
               shadowColor: Color.fromRGBO(117, 121, 255, 1),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -80,7 +80,7 @@ class _TodayState extends State<Today> {
                       height: 20,
                     ),
                     MaterialButton(
-                      elevation: 5,
+                      elevation: 3,
                       textColor: Colors.white,
                       onPressed: () {
                         Navigator.of(context).push(CupertinoPageRoute(

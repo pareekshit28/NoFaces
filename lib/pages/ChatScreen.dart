@@ -145,7 +145,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             child: Column(
                               children: [
                                 Text(
-                                  "Helloooooooooooo how are you doing ? ",
+                                  "Helloooooooooooo! ",
                                   style: TextStyle(fontSize: 15.5),
                                 ),
                               ],
@@ -200,7 +200,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color.fromRGBO(178, 36, 239, 1),
+                              color: Color.fromRGBO(244, 157, 159, 1),
                             ),
                             borderRadius: BorderRadius.circular(32)),
                       ),
