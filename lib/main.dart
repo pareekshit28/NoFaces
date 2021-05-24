@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:no_faces/pages/HomeScreen.dart';
 import 'package:no_faces/pages/LoginScreen.dart';
 import 'package:no_faces/pages/OnBoarding.dart';
+import 'package:no_faces/pages/InterestsScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'No Faces',
       theme: ThemeData(primarySwatch: Colors.grey),
-      home: OnBoarding(),
+      home: HomeScreen(),
     );
   }
 }
