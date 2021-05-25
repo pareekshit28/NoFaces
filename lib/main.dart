@@ -1,10 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:no_faces/pages/HomeScreen.dart';
-import 'package:no_faces/pages/LoginScreen.dart';
-import 'package:no_faces/pages/OnBoarding.dart';
-import 'package:no_faces/pages/InterestsScreen.dart';
+import 'package:no_faces/GateKeeper.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'No Faces',
       theme: ThemeData(primarySwatch: Colors.grey),
-      home: HomeScreen(),
+      home: GateKeeper(),
     );
   }
 }

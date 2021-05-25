@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:no_faces/pages/InterestsScreen.dart';
+import 'package:no_faces/pages/LoginScreen.dart';
 import 'package:no_faces/pages/OnBoarding.dart';
 
 class ProfileScreen extends StatefulWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -24,8 +30,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CircleAvatar(
                     radius: 40,
                     backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(
-                        "https://img.buzzfeed.com/buzzfeed-static/static/2021-02/5/20/asset/cb4b9aaeff63/sub-buzz-1897-1612557676-39.png?crop=933%3A793%3B142%2C0&resize=475%3A%2A"),
+                    backgroundImage:
+                        NetworkImage(widget._auth.currentUser.photoURL),
                   ),
                   SizedBox(width: 10),
                   Flexible(
@@ -33,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Rachel Green",
+                          widget._auth.currentUser.displayName,
                           style: TextStyle(fontSize: 18),
                         ),
                         Row(children: [
@@ -61,10 +67,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ListTile(
               title: Text("Interests"),
-              trailing: Icon(CupertinoIcons.arrow_right),
+              leading: Icon(Icons.recommend),
               onTap: () => Navigator.of(context).push(
                   CupertinoPageRoute(builder: (context) => InterestsScreen())),
-            )
+            ),
+            ListTile(
+                title: Text(
+                  "Sign Out",
+                  style: TextStyle(color: Colors.red),
+                ),
+                leading: Icon(
+                  Icons.power_settings_new,
+                  color: Colors.red,
+                ),
+                onTap: () {
+                  widget._auth
+                      .signOut()
+                      .then((value) => widget._googleSignIn.signOut())
+                      .then((value) => Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
+                          ((Route route) => false)));
+                })
           ],
         ),
       ),

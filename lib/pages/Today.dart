@@ -24,7 +24,7 @@ class _TodayState extends State<Today> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 92.0),
-            child: Text("Today's Pick",
+            child: Text("✨ Today's Pick",
                 style: TextStyle(
                     color: Colors.blue[700],
                     letterSpacing: 1.3,

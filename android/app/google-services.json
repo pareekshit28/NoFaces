@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "18649889501",
+    "project_id": "nofaces",
+    "storage_bucket": "nofaces.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18649889501:android:a041d070c3639e82333934",
+        "android_client_info": {
+          "package_name": "com.techtotality.no_faces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18649889501-ufg52km5spp5qc259bbmcabkconubha1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techtotality.no_faces",
+            "certificate_hash": "b657012d6fe2f9d81690f74ca36e7531860710ee"
+          }
+        },
+        {
+          "client_id": "18649889501-qka7qfr92khdpjlofor3edm5p0po4eu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW9tydUZedav3hP9vuXw3wIGqAsx9DMD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18649889501-qka7qfr92khdpjlofor3edm5p0po4eu3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

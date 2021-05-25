@@ -99,78 +99,83 @@ class _ChatScreenState extends State<ChatScreen> {
         // leadingWidth: 50,
       ),
       body: Stack(children: [
-        ListView.builder(
-            reverse: true,
-            itemCount: 20,
-            shrinkWrap: true,
-            itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.only(top: 15, right: 12, left: 12),
-                  child: Align(
-                    alignment:
-                        index % 2 == 0 ? Alignment.topLeft : Alignment.topRight,
-                    child: Column(
-                      crossAxisAlignment: index % 2 == 0
-                          ? CrossAxisAlignment.start
-                          : CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * 0.8,
-                          ),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: index % 2 == 0
-                                    ? [
-                                        Color.fromRGBO(106, 181, 249, 1),
-                                        Color.fromRGBO(159, 140, 251, 1)
-                                      ]
-                                    : [
-                                        Color.fromRGBO(244, 157, 159, 1),
-                                        Color.fromRGBO(252, 188, 210, 1)
-                                      ],
-                              ),
-                              borderRadius: index % 2 == 0
-                                  ? BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      bottomLeft: Radius.circular(5),
-                                      topRight: Radius.circular(20),
-                                      bottomRight: Radius.circular(20))
-                                  : BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      bottomLeft: Radius.circular(20),
-                                      bottomRight: Radius.circular(5),
-                                      topRight: Radius.circular(20))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Helloooooooooooo! ",
-                                  style: TextStyle(fontSize: 15.5),
+        Scrollbar(
+          child: ListView.builder(
+              reverse: true,
+              itemCount: 20,
+              shrinkWrap: true,
+              itemBuilder: (context, index) => Container(
+                    margin: EdgeInsets.only(top: 15, right: 12, left: 12),
+                    child: Align(
+                      alignment: index % 2 == 0
+                          ? Alignment.topLeft
+                          : Alignment.topRight,
+                      child: Column(
+                        crossAxisAlignment: index % 2 == 0
+                            ? CrossAxisAlignment.start
+                            : CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width * 0.8,
+                            ),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: index % 2 == 0
+                                      ? [
+                                          Color.fromRGBO(106, 181, 249, 1),
+                                          Color.fromRGBO(159, 140, 251, 1)
+                                        ]
+                                      : [
+                                          Color.fromRGBO(244, 157, 159, 1),
+                                          Color.fromRGBO(252, 188, 210, 1)
+                                        ],
                                 ),
-                              ],
+                                borderRadius: index % 2 == 0
+                                    ? BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        bottomLeft: Radius.circular(5),
+                                        topRight: Radius.circular(20),
+                                        bottomRight: Radius.circular(20))
+                                    : BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20),
+                                        bottomRight: Radius.circular(5),
+                                        topRight: Radius.circular(20))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Helloooooooooooo! ",
+                                    style: TextStyle(fontSize: 15.5),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(top: 5, right: 7, left: 7),
-                            alignment: index % 2 == 0
-                                ? Alignment.bottomLeft
-                                : Alignment.bottomRight,
-                            child: Text(
-                              "15:04",
-                              style: TextStyle(
-                                  fontSize: 12.5, color: Colors.blueGrey[700]),
-                            )),
-                        index == 0
-                            ? SizedBox(
-                                height: 90,
-                              )
-                            : SizedBox()
-                      ],
+                          Container(
+                              margin:
+                                  EdgeInsets.only(top: 5, right: 7, left: 7),
+                              alignment: index % 2 == 0
+                                  ? Alignment.bottomLeft
+                                  : Alignment.bottomRight,
+                              child: Text(
+                                "15:04",
+                                style: TextStyle(
+                                    fontSize: 12.5,
+                                    color: Colors.blueGrey[700]),
+                              )),
+                          index == 0
+                              ? SizedBox(
+                                  height: 90,
+                                )
+                              : SizedBox()
+                        ],
+                      ),
                     ),
-                  ),
-                )),
+                  )),
+        ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
