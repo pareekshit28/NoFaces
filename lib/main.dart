@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:no_faces/GateKeeper.dart';
+import 'package:no_faces/Services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Services().initConnection();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
