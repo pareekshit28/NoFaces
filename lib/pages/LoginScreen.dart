@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       onTap: () {},
                       child: Text(
-                        "Terms & Conditions",
+                        "Terms of Service",
                         style: TextStyle(fontSize: 13),
                       ),
                     )

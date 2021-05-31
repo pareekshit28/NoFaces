@@ -7,93 +7,86 @@ class InterestsScreen extends StatefulWidget {
 }
 
 class _InterestsScreenState extends State<InterestsScreen> {
-  int _num = 1;
-  bool _selected = false;
+  List<Map<String, dynamic>> list = [
+    {"label": Text("👋 Hi"), "selected": false},
+    {"label": Text("✨ Sparkle"), "selected": false},
+    {"label": Text("❤ Love"), "selected": false},
+    {"label": Text("💩 Poop"), "selected": false},
+    {"label": Text("😂 Laughing"), "selected": false},
+    {"label": Text("🍺 Beer"), "selected": false},
+    {"label": Text("😭 Crying"), "selected": false},
+    {"label": Text("🎥 Film"), "selected": false},
+    {"label": Text("🎶 Music"), "selected": false},
+    {"label": Text("🤳 Selfie"), "selected": false}
+  ];
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> widgetList = [];
+    list.asMap().forEach((key, value) {
+      widgetList.add(ChoiceChip(
+          elevation: 5,
+          onSelected: (value) {
+            setState(() {
+              list.elementAt(key)["selected"] = value;
+            });
+          },
+          label: value["label"],
+          selected: value["selected"]));
+    });
     return Scaffold(
-        backgroundColor: Colors.white.withOpacity(0.8),
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          centerTitle: true,
           elevation: 10,
-          title: Text("Question $_num of 10"),
-        ),
-        bottomNavigationBar: Row(
-          children: [
-            MaterialButton(
-              height: 50,
-              minWidth: MediaQuery.of(context).size.width * 0.5,
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0)),
-              child: Row(
-                children: [
-                  Icon(CupertinoIcons.arrow_left),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("Previous"),
-                ],
-              ),
-              onPressed: () {},
-            ),
-            MaterialButton(
-              height: 50,
-              minWidth: MediaQuery.of(context).size.width * 0.5,
-              color: _selected == true ? Colors.lightBlueAccent : Colors.grey,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0)),
-              child: Row(
-                children: [
-                  Text("Next"),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Icon(CupertinoIcons.arrow_right),
-                ],
-              ),
-              onPressed: () {},
-            ),
-          ],
+          title: Text("Interests"),
         ),
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(bottom: 30.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Question",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                  itemBuilder: (context, index) => Padding(
+                    padding:
+                        const EdgeInsets.only(top: 16.0, right: 12, left: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Basic Interests",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Wrap(
+                          spacing: 10,
+                          children: widgetList,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("Pick 5 of your most relevent Interests."),
                 SizedBox(
                   height: 20,
                 ),
-                Text(
-                  "Answer",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Card(
-                  elevation: 5,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 15,
-                      itemBuilder: (context, index) => CheckboxListTile(
-                          title: Text((index + 1).toString()),
-                          value: _selected,
-                          onChanged: (value) {
-                            setState(() {
-                              _selected = value;
-                            });
-                          })),
+                MaterialButton(
+                  height: 50,
+                  minWidth: 150,
+                  onPressed: () {},
+                  child: Icon(
+                    CupertinoIcons.arrow_right,
+                    color: Colors.white,
+                  ),
+                  color: Colors.purple,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28)),
                 ),
               ],
             ),

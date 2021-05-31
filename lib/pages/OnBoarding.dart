@@ -1,7 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:no_faces/Services.dart';
 
 class OnBoarding extends StatefulWidget {
+  final Services _services = Services();
+  final User _user = FirebaseAuth.instance.currentUser;
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
   final List<DropdownMenuItem<String>> _genderList = [
     DropdownMenuItem(
       child: Text("Woman"),
@@ -85,96 +94,12 @@ class OnBoarding extends StatefulWidget {
     ),
   ];
 
-  final List<DropdownMenuItem<String>> _orientationList = [
-    DropdownMenuItem(
-      child: Text("Straight"),
-      value: "Straight",
-    ),
-    DropdownMenuItem(
-      child: Text("Gay"),
-      value: "Gay",
-    ),
-    DropdownMenuItem(
-      child: Text("Bisexual"),
-      value: "Bisexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Asexual"),
-      value: "Asexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Demisexual"),
-      value: "Demisexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Homoflexible"),
-      value: "Homoflexible",
-    ),
-    DropdownMenuItem(
-      child: Text("Heteroflexible"),
-      value: "Heteroflexible",
-    ),
-    DropdownMenuItem(
-      child: Text("Lesbian"),
-      value: "Lesbian",
-    ),
-    DropdownMenuItem(
-      child: Text("Pansexual"),
-      value: "Pansexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Queer"),
-      value: "Queer",
-    ),
-    DropdownMenuItem(
-      child: Text("Questioning"),
-      value: "Questioning",
-    ),
-    DropdownMenuItem(
-      child: Text("Gray-asexual"),
-      value: "Gray-asexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Reciprosexual"),
-      value: "Reciprosexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Akiosexual"),
-      value: "Akiosexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Aceflux"),
-      value: "Aceflux",
-    ),
-    DropdownMenuItem(
-      child: Text("Grayromantic"),
-      value: "Grayromantic",
-    ),
-    DropdownMenuItem(
-      child: Text("Demiromantic"),
-      value: "Demiromantic",
-    ),
-    DropdownMenuItem(
-      child: Text("Recipromantic"),
-      value: "Recipromantic",
-    ),
-    DropdownMenuItem(
-      child: Text("Akioromantic"),
-      value: "Akioromantic",
-    ),
-    DropdownMenuItem(
-      child: Text("Aroflux"),
-      value: "Aroflux",
-    ),
-  ];
-
   @override
   _OnBoardingState createState() => _OnBoardingState();
 }
 
 class _OnBoardingState extends State<OnBoarding> {
   String _gender;
-  String _orientation;
 
   @override
   Widget build(BuildContext context) {
@@ -237,6 +162,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       height: 60,
                     ),
                     TextField(
+                      controller: widget._nameController,
                       cursorColor: Colors.purple,
                       style: TextStyle(color: Colors.grey[800], fontSize: 22),
                       decoration: InputDecoration(
@@ -275,6 +201,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     Expanded(
                       flex: 3,
                       child: TextField(
+                        controller: widget._ageController,
                         cursorColor: Colors.purple,
                         keyboardType: TextInputType.number,
                         style: TextStyle(color: Colors.grey[800], fontSize: 22),
@@ -311,6 +238,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     Expanded(
                       flex: 5,
                       child: TextField(
+                        controller: widget._cityController,
                         cursorColor: Colors.purple,
                         style: TextStyle(color: Colors.grey[800], fontSize: 22),
                         decoration: InputDecoration(
@@ -399,50 +327,8 @@ class _OnBoardingState extends State<OnBoarding> {
                 SizedBox(
                   height: 30,
                 ),
-                DropdownButtonFormField(
-                  items: widget._orientationList,
-                  value: _orientation,
-                  isExpanded: true,
-                  onChanged: (value) {
-                    setState(() {
-                      _orientation = value;
-                    });
-                  },
-                  icon: Icon(
-                    Icons.arrow_drop_down_rounded,
-                    size: 30,
-                    color: Color.fromRGBO(157, 171, 255, 1),
-                  ),
-                  style: TextStyle(color: Colors.grey[800], fontSize: 22),
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.face,
-                      color: Color.fromRGBO(157, 171, 255, 1),
-                    ),
-                    fillColor: Colors.white,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    filled: true,
-                    labelText: 'Orientation',
-                    labelStyle: TextStyle(
-                      color: Color.fromRGBO(157, 171, 255, 1),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 20,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromRGBO(178, 36, 239, 1), width: 1.25),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromRGBO(157, 171, 255, 1)),
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
                 TextField(
+                  controller: widget._bioController,
                   maxLines: 7,
                   keyboardType: TextInputType.multiline,
                   cursorColor: Colors.purple,
@@ -477,7 +363,14 @@ class _OnBoardingState extends State<OnBoarding> {
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    onPressed: () {},
+                    onPressed: () {
+                      widget._services.submitOnBoarding(
+                          3.toString(),
+                          widget._nameController.text,
+                          int.parse(widget._ageController.text),
+                          widget._cityController.text,
+                          widget._bioController.text);
+                    },
                     child: Text("Next"),
                     color: Color.fromRGBO(117, 121, 255, 1),
                   ),
