@@ -25,14 +25,21 @@ class _InterestsScreenState extends State<InterestsScreen> {
     List<Widget> widgetList = [];
     list.asMap().forEach((key, value) {
       widgetList.add(ChoiceChip(
-          elevation: 5,
-          onSelected: (value) {
-            setState(() {
-              list.elementAt(key)["selected"] = value;
-            });
-          },
-          label: value["label"],
-          selected: value["selected"]));
+        onSelected: (value) {
+          setState(() {
+            list.elementAt(key)["selected"] = value;
+          });
+        },
+        disabledColor: Colors.purple[50],
+        selectedColor: Colors.purple[400],
+        label: value["label"],
+        selected: value["selected"],
+        labelStyle: TextStyle(
+            color: value["selected"] ? Colors.white : Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            letterSpacing: 1),
+      ));
     });
     return Scaffold(
         backgroundColor: Colors.white,
@@ -53,7 +60,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                   itemCount: 10,
                   itemBuilder: (context, index) => Padding(
                     padding:
-                        const EdgeInsets.only(top: 16.0, right: 12, left: 16),
+                        const EdgeInsets.only(top: 16.0, right: 7, left: 13),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -67,6 +74,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                         ),
                         Wrap(
                           spacing: 10,
+                          direction: Axis.horizontal,
                           children: widgetList,
                         ),
                       ],

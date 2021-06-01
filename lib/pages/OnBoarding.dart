@@ -127,8 +127,8 @@ class _OnBoardingState extends State<OnBoarding> {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: <Color>[
-                Color.fromRGBO(178, 36, 239, 1),
-                Color.fromRGBO(117, 121, 255, 1)
+                Color.fromRGBO(157, 171, 255, 1),
+                Color.fromRGBO(159, 140, 251, 1)
               ],
             ),
           ),
@@ -142,11 +142,11 @@ class _OnBoardingState extends State<OnBoarding> {
             decoration: new ShapeDecoration(
               shape: const MyShapeBorder(curveHeight),
               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
                 colors: <Color>[
-                  Color.fromRGBO(233, 206, 247, 1),
-                  Color.fromRGBO(239, 240, 255, 1)
+                  Color.fromRGBO(236, 223, 252, 1),
+                  Color.fromRGBO(254, 255, 255, 1)
                 ],
               ),
             ),
