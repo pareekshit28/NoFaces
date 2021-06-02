@@ -8,8 +8,8 @@ class LoginScreen extends StatefulWidget {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final Shader linearGradient = LinearGradient(
     colors: <Color>[
-      Color.fromRGBO(247, 182, 183, 1),
-      Color.fromRGBO(253, 216, 229, 1),
+      Color.fromRGBO(244, 157, 159, 1),
+      Color.fromRGBO(252, 188, 210, 1)
     ],
   ).createShader(Rect.fromLTWH(0.0, 0.0, 250.0, 70.0));
 
@@ -42,12 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Text(
               "No Faces",
               style: TextStyle(
-                  // fontWeight: FontWeight.bold,
-                  letterSpacing: 2.3,
-                  wordSpacing: -5,
-                  fontSize: 45,
-                  fontWeight: FontWeight.bold,
-                  foreground: Paint()..shader = widget.linearGradient),
+                // fontWeight: FontWeight.bold,
+                letterSpacing: 2.3,
+                wordSpacing: -5,
+                fontSize: 45,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                // foreground: Paint()..shader = widget.linearGradient
+              ),
             ),
           ),
           decoration: new ShapeDecoration(
