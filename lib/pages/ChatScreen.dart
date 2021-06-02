@@ -63,7 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ),
                 Icon(
-                  Icons.favorite_border_rounded,
+                  Icons.info_outline_rounded,
                   color: Colors.black87,
                 ),
               ],

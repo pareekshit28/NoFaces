@@ -34,11 +34,12 @@ class _ProfileCardStackState extends State<ProfileCardStack> {
       matchEngine: _matchEngine,
       itemBuilder: (BuildContext context, int index) => Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        elevation: (widget.list.length - index).toDouble() * 5 >= 20
-            ? 20
-            : (widget.list.length - index).toDouble() * 5,
+        elevation: 2,
+        // (widget.list.length - index).toDouble() * 4 >= 20
+        //     ? 20
+        //     : (widget.list.length - index).toDouble() * 5,
         shadowColor: Color.fromRGBO(117, 121, 255, 1),
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
           child: Column(
             children: [
@@ -76,45 +77,63 @@ class _ProfileCardStackState extends State<ProfileCardStack> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.20,
+                  height: MediaQuery.of(context).size.height * 0.30,
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Text(
                       widget.list.elementAt(index)["bio"],
+                      style: TextStyle(fontSize: 17),
                     ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
+              SizedBox(height: 10),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       onTap: () {
                         _matchEngine.currentItem.nope();
                       },
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Text("✖"),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Icon(
+                          Icons.clear_rounded,
+                          color: Colors.red[400],
+                          size: 36,
                         ),
                       ),
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.chevron_left_rounded,
+                          color: Colors.blueGrey,
+                          size: 35,
+                        ),
+                        Text(
+                          "Swipe",
+                          style: TextStyle(fontSize: 22, letterSpacing: 1),
+                        ),
+                        Icon(
+                          Icons.chevron_right_rounded,
+                          color: Colors.blueGrey,
+                          size: 35,
+                        ),
+                      ],
                     ),
                     InkWell(
                       onTap: () {
                         _matchEngine.currentItem.like();
                       },
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Text("❤"),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Icon(
+                          Icons.favorite,
+                          size: 36,
+                          color: Color.fromRGBO(157, 171, 255, 1),
                         ),
                       ),
                     )

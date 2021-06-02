@@ -44,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: new ShapeDecoration(
                   shape: const MyShapeBorder(curveHeight),
                   color: _selectedIndex == 0
-                      ? Color.fromRGBO(117, 121, 255, 1)
-                      : Color.fromRGBO(178, 36, 239, 1),
+                      ? Color.fromRGBO(157, 171, 255, 1)
+                      : Color.fromRGBO(159, 140, 251, 1),
                   // gradient: LinearGradient(
                   //   begin: Alignment.centerLeft,
                   //   end: Alignment.centerRight,
@@ -62,14 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color.fromRGBO(20, 20, 20, 1),
         unselectedItemColor: Color.fromRGBO(100, 100, 100, 1),
         selectedItemColor: Colors.white,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Today"),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.favorite,
-              ),
-              label: "Favorites"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
+              icon: Icon(Icons.amp_stories_rounded, size: 30), label: "Today"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_rounded, size: 30), label: "Favorites"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person, size: 30), label: "Profile")
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
