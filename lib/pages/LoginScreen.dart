@@ -8,8 +8,8 @@ class LoginScreen extends StatefulWidget {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final Shader linearGradient = LinearGradient(
     colors: <Color>[
-      Color.fromRGBO(178, 36, 239, 1),
-      Color.fromRGBO(117, 121, 255, 1)
+      Color.fromRGBO(244, 157, 159, 1),
+      Color.fromRGBO(252, 188, 210, 1)
     ],
   ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
@@ -22,7 +22,47 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const curveHeight = 60.0;
+
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 270,
+        flexibleSpace: Container(
+          child: Align(
+            alignment: Alignment(0, 1.2),
+            // child: Text(
+            //   "Let's Get on Board!",
+            //   style: TextStyle(
+            //       color: Colors.white,
+            //       letterSpacing: 1.3,
+            //       wordSpacing: -2,
+            //       fontWeight: FontWeight.w500,
+            //       fontSize: 28.0),
+            // ),
+            child: Text(
+              "No Faces",
+              style: TextStyle(
+                  // fontWeight: FontWeight.bold,
+                  letterSpacing: 2.5,
+                  wordSpacing: -5,
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold,
+                  foreground: Paint()..shader = widget.linearGradient),
+            ),
+          ),
+          decoration: new ShapeDecoration(
+            shape: const MyShapeBorder(curveHeight),
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                Color.fromRGBO(157, 171, 255, 1),
+                Color.fromRGBO(159, 140, 251, 1)
+              ],
+            ),
+          ),
+        ),
+      ),
       body: Container(
         // decoration: BoxDecoration(
         //   gradient: LinearGradient(
@@ -37,20 +77,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Stack(
           children: [
             Align(
-              alignment: Alignment(0, -0.3),
-              child: Text(
-                "No Faces",
-                style: TextStyle(
-                    // fontWeight: FontWeight.bold,
-                    letterSpacing: 2.5,
-                    wordSpacing: -5,
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold,
-                    foreground: Paint()..shader = widget.linearGradient),
-              ),
+              alignment: Alignment(0, -0.6),
             ),
             Align(
-              alignment: Alignment(0, 0.43),
+              alignment: Alignment(0, 0.23),
               child: MaterialButton(
                 color: Colors.white,
                 minWidth: 240,
@@ -177,4 +207,21 @@ class _LoginScreenState extends State<LoginScreen> {
           (route) => false);
     });
   }
+}
+
+class MyShapeBorder extends ContinuousRectangleBorder {
+  const MyShapeBorder(this.curveHeight);
+  final double curveHeight;
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection textDirection}) => Path()
+    ..lineTo(0, rect.size.height)
+    ..quadraticBezierTo(
+      rect.size.width / 2,
+      rect.size.height + curveHeight * 2,
+      rect.size.width,
+      rect.size.height,
+    )
+    ..lineTo(rect.size.width, 0)
+    ..close();
 }

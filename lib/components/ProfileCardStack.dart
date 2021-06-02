@@ -89,7 +89,7 @@ class _ProfileCardStackState extends State<ProfileCardStack> {
               ),
               SizedBox(height: 10),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5),
+                margin: EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -98,7 +98,7 @@ class _ProfileCardStackState extends State<ProfileCardStack> {
                         _matchEngine.currentItem.nope();
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        // padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Icon(
                           Icons.clear_rounded,
                           color: Colors.red[400],
@@ -129,7 +129,7 @@ class _ProfileCardStackState extends State<ProfileCardStack> {
                         _matchEngine.currentItem.like();
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        // padding: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Icon(
                           Icons.favorite,
                           size: 36,
