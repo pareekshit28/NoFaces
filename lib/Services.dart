@@ -1,12 +1,47 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
 
 class Services with ChangeNotifier {
   bool empty = true;
+  static final List<String> genderList = [
+    "Woman",
+    "Man",
+    "Agender",
+    "Androgynous",
+    "Bigender",
+    "Genderfluid",
+    "Genderqueer",
+    "Gender Nonconforming",
+    "Hijra",
+    "Intersex",
+    "Non-binary",
+    "Pangender",
+    "Transfeminine",
+    "Transgender",
+    "Trans Man",
+    "Transmasculine",
+    "Transsexual",
+    "Trans Woman",
+    "Two Spirit",
+    "Other gender",
+  ];
 
   void setEmpty(bool value) {
     empty = value;
     notifyListeners();
+  }
+
+  List<DropdownMenuItem<String>> getGenderDropdownItems() {
+    List<DropdownMenuItem<String>> list = [];
+    genderList.forEach((element) {
+      list.add(DropdownMenuItem<String>(
+        child: Text(element),
+        value: element,
+      ));
+    });
+
+    return list;
   }
 
   static final connection = PostgreSQLConnection(

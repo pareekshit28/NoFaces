@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:no_faces/Services.dart';
 import 'package:no_faces/components/ProfileCardStack.dart';
+import 'package:no_faces/pages/SearchPage.dart';
 import 'package:provider/provider.dart';
 
 class Today extends StatefulWidget {
@@ -70,7 +71,10 @@ class _TodayState extends State<Today> {
                 elevation: 10,
                 height: 50,
                 minWidth: 150,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SearchPage()));
+                },
                 child: Text("🔎  Find People"),
                 color: Color.fromRGBO(117, 121, 255, 1),
                 shape: RoundedRectangleBorder(

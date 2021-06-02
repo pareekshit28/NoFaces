@@ -11,89 +11,6 @@ class OnBoarding extends StatefulWidget {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
-  final List<DropdownMenuItem<String>> _genderList = [
-    DropdownMenuItem(
-      child: Text("Woman"),
-      value: "Woman",
-    ),
-    DropdownMenuItem(
-      child: Text("Man"),
-      value: "Man",
-    ),
-    DropdownMenuItem(
-      child: Text("Agender"),
-      value: "Agender",
-    ),
-    DropdownMenuItem(
-      child: Text("Androgynous"),
-      value: "Androgynous",
-    ),
-    DropdownMenuItem(
-      child: Text("Bigender"),
-      value: "Bigender",
-    ),
-    DropdownMenuItem(
-      child: Text("Genderfluid"),
-      value: "Genderfluid",
-    ),
-    DropdownMenuItem(
-      child: Text("Genderqueer"),
-      value: "Genderqueer",
-    ),
-    DropdownMenuItem(
-      child: Text("Gender Nonconforming"),
-      value: "Gender Nonconforming",
-    ),
-    DropdownMenuItem(
-      child: Text("Hijra"),
-      value: "Hijra",
-    ),
-    DropdownMenuItem(
-      child: Text("Intersex"),
-      value: "Intersex",
-    ),
-    DropdownMenuItem(
-      child: Text("Non-binary"),
-      value: "Non-binary",
-    ),
-    DropdownMenuItem(
-      child: Text("Pangender"),
-      value: "Pangender",
-    ),
-    DropdownMenuItem(
-      child: Text("Transfeminine"),
-      value: "Transfeminine",
-    ),
-    DropdownMenuItem(
-      child: Text("Transgender"),
-      value: "Transgender",
-    ),
-    DropdownMenuItem(
-      child: Text("Trans Man"),
-      value: "Trans Man",
-    ),
-    DropdownMenuItem(
-      child: Text("Transmasculine"),
-      value: "Transmasculine",
-    ),
-    DropdownMenuItem(
-      child: Text("Transsexual"),
-      value: "Transsexual",
-    ),
-    DropdownMenuItem(
-      child: Text("Trans Woman"),
-      value: "Trans Woman",
-    ),
-    DropdownMenuItem(
-      child: Text("Two Spirit"),
-      value: "Two Spirit",
-    ),
-    DropdownMenuItem(
-      child: Text("Other gender"),
-      value: "Other gender",
-    ),
-  ];
-
   @override
   _OnBoardingState createState() => _OnBoardingState();
 }
@@ -279,7 +196,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     size: 30,
                     color: Color.fromRGBO(157, 171, 255, 1),
                   ),
-                  items: widget._genderList,
+                  items: widget._services.getGenderDropdownItems(),
                   value: _gender,
                   isExpanded: true,
                   onChanged: (value) {

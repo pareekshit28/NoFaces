@@ -6,6 +6,12 @@ import 'package:no_faces/pages/HomeScreen.dart';
 class LoginScreen extends StatefulWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final Shader linearGradient = LinearGradient(
+    colors: <Color>[
+      Color.fromRGBO(178, 36, 239, 1),
+      Color.fromRGBO(117, 121, 255, 1)
+    ],
+  ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -18,16 +24,16 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment(-1, 1),
-              end: Alignment(1, 1),
-              colors: <Color>[
-                Color.fromRGBO(178, 36, 239, 1),
-                Color.fromRGBO(117, 121, 255, 1)
-              ],
-              tileMode: TileMode.clamp),
-        ),
+        // decoration: BoxDecoration(
+        //   gradient: LinearGradient(
+        //       begin: Alignment(-1, 1),
+        //       end: Alignment(1, 1),
+        //       colors: <Color>[
+        //         Color.fromRGBO(178, 36, 239, 1),
+        //         Color.fromRGBO(117, 121, 255, 1)
+        //       ],
+        //       tileMode: TileMode.clamp),
+        // ),
         child: Stack(
           children: [
             Align(
@@ -38,21 +44,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     // fontWeight: FontWeight.bold,
                     letterSpacing: 2.5,
                     wordSpacing: -5,
-                    fontSize: 35,
-                    color: Colors.white),
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                    foreground: Paint()..shader = widget.linearGradient),
               ),
             ),
             Align(
               alignment: Alignment(0, 0.43),
               child: MaterialButton(
-                color: Colors.transparent,
+                color: Colors.white,
                 minWidth: 240,
                 height: 50,
-                textColor: Colors.white,
-                elevation: 0.1,
+                elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28),
-                    side: BorderSide(color: Colors.redAccent)),
+                  borderRadius: BorderRadius.circular(28),
+                ),
                 onPressed: () {},
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -72,16 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Align(
-              alignment: Alignment(0, 0.6),
+              alignment: Alignment(0, 0.62),
               child: MaterialButton(
-                color: Colors.transparent,
+                color: Colors.white,
                 minWidth: 240,
                 height: 50,
-                textColor: Colors.white,
-                elevation: 0.1,
+                elevation: 2,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28),
-                    side: BorderSide(color: Colors.lightBlueAccent)),
+                  borderRadius: BorderRadius.circular(28),
+                ),
                 onPressed: () {
                   onGoogleSignIn(context);
                 },
@@ -106,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Align(
-                alignment: Alignment(0.2, 0.99),
+                alignment: Alignment(0.09, 0.99),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:no_faces/pages/HomeScreen.dart';
 import 'package:no_faces/pages/LoginScreen.dart';
+import 'package:no_faces/pages/OnBoarding.dart';
 
 enum SignedState { signedIn, notSignedIn }
 
