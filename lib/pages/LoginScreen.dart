@@ -8,8 +8,8 @@ class LoginScreen extends StatefulWidget {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final Shader linearGradient = LinearGradient(
     colors: <Color>[
-      Color.fromRGBO(247, 182, 183, 1),
-      Color.fromRGBO(253, 216, 229, 1),
+      Color.fromRGBO(244, 157, 159, 1),
+      Color.fromRGBO(252, 188, 210, 1)
     ],
   ).createShader(Rect.fromLTWH(0.0, 0.0, 250.0, 70.0));
 
