@@ -22,24 +22,26 @@ class _InterestsScreenState extends State<InterestsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgetList = [];
-    list.asMap().forEach((key, value) {
-      widgetList.add(ChoiceChip(
-        onSelected: (value) {
-          setState(() {
-            list.elementAt(key)["selected"] = value;
-          });
-        },
-        disabledColor: Colors.purple[50],
-        selectedColor: Colors.purple[400],
-        label: value["label"],
-        selected: value["selected"],
-        labelStyle: TextStyle(
-            color: value["selected"] ? Colors.white : Colors.black,
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-            letterSpacing: 1),
-      ));
+    List<ChoiceChip> widgetList = [];
+    list.forEach((element) {
+      widgetList.add(
+        ChoiceChip(
+          onSelected: (value) {
+            setState(() {
+              element["selected"] = value;
+            });
+          },
+          disabledColor: Colors.purple[50],
+          selectedColor: Colors.purple[400],
+          label: element["label"],
+          selected: element["selected"],
+          labelStyle: TextStyle(
+              color: element["selected"] ? Colors.white : Colors.black,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              letterSpacing: 1),
+        ),
+      );
     });
     return Scaffold(
         backgroundColor: Colors.white,
@@ -73,8 +75,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                           height: 5,
                         ),
                         Wrap(
-                          spacing: 10,
-                          direction: Axis.horizontal,
+                          spacing: 5,
                           children: widgetList,
                         ),
                       ],

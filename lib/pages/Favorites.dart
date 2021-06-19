@@ -85,76 +85,59 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
       shrinkWrap: true,
       itemCount: widget.list.length,
-      itemBuilder: (context, index) => InkWell(
-        child: Container(
-          padding: index == 0
-              ? EdgeInsets.only(left: 14.0, top: 70, bottom: 7, right: 14)
-              : EdgeInsets.only(left: 14.0, top: 7, bottom: 7, right: 14),
-          child: Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              // border: Border.all(
-              //   color: Colors.grey,
-              // ),
-              borderRadius: BorderRadius.circular(10.0),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  offset: const Offset(0, 1.2),
-                  color: Colors.grey[400],
-                  blurRadius: 1.5,
+      itemBuilder: (context, index) => Padding(
+        padding: index == 0
+            ? EdgeInsets.only(left: 14.0, top: 70, bottom: 7, right: 14)
+            : EdgeInsets.only(left: 14.0, top: 0, bottom: 7, right: 14),
+        child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => ChatScreen(
+                        name: widget.list[index]["name"],
+                        dp: widget.list[index]["dp"],
+                      )));
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(children: [
+                CircleAvatar(
+                  radius: 27,
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: NetworkImage(
+                    widget.list[index]["dp"],
+                  ),
                 ),
-              ],
-            ),
-            child: Row(children: [
-              CircleAvatar(
-                radius: 27,
-                backgroundColor: Colors.transparent,
-                backgroundImage: NetworkImage(
-                  widget.list[index]["dp"],
-                ),
-              ),
-              SizedBox(width: 14),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.list[index]["name"],
-                      style: TextStyle(
-                        fontSize: 17,
+                SizedBox(width: 14),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.list[index]["name"],
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      widget.list[index]["st"],
-                      maxLines: 2,
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        widget.list[index]["st"],
+                        maxLines: 2,
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ]),
+              ]),
+            ),
           ),
         ),
-        onTap: () {
-          Navigator.of(context).push(CupertinoPageRoute(
-              builder: (context) => ChatScreen(
-                    name: widget.list[index]["name"],
-                    dp: widget.list[index]["dp"],
-                  )));
-        },
-      ),
-      separatorBuilder: (BuildContext context, int index) => Divider(
-        color: Colors.white,
-        indent: 82,
-        endIndent: 10,
-        height: 5,
       ),
     );
   }

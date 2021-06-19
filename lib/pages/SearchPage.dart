@@ -32,6 +32,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     List<ChoiceChip> _tagList = [];
+
     widget._list.forEach((element) {
       _tagList.add(ChoiceChip(
         side: BorderSide(
@@ -53,30 +54,30 @@ class _SearchPageState extends State<SearchPage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {}, label: Text("Submit")),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Container(
-          constraints:
-              BoxConstraints(minWidth: MediaQuery.of(context).size.width),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Select atmost 5 tags"),
-              SizedBox(height: 20),
-              TextField(
-                controller: _searchController,
-                decoration: InputDecoration(hintText: "Search tags"),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              SingleChildScrollView(
-                child: Wrap(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Container(
+            constraints:
+                BoxConstraints(minWidth: MediaQuery.of(context).size.width),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Select atmost 5 tags"),
+                SizedBox(height: 20),
+                TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(hintText: "Search tags"),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Wrap(
                   spacing: 5,
                   children: _tagList,
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

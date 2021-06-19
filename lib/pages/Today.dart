@@ -1,9 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:no_faces/Services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:no_faces/components/ProfileCardStack.dart';
-import 'package:no_faces/pages/SearchPage.dart';
-import 'package:provider/provider.dart';
 
 class Today extends StatefulWidget {
   final _list = [
@@ -68,60 +68,70 @@ class Today extends StatefulWidget {
 }
 
 class _TodayState extends State<Today> {
+  bool empty = false;
+  List _cards;
+
   @override
   Widget build(BuildContext context) {
-    widget._list.length != 0
-        ? Provider.of<Services>(context, listen: false).setEmpty(false)
-        : Provider.of<Services>(context, listen: false).setEmpty(true);
-    return Consumer<Services>(
-      builder: (context, value, child) => SingleChildScrollView(
-        child: Container(
-          constraints:
-              BoxConstraints(minWidth: MediaQuery.of(context).size.width),
+    _cards = List<Widget>.generate(widget._list.length + 1, (index) {
+      if (index == 0) {
+        return Center(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              value.empty == false
-                  ? Column(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.08,
-                        ),
-                        ProfileCardStack(
-                          list: widget._list,
-                        ),
-                      ],
-                    )
-                  : Column(children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.4,
-                      ),
-                      Text(
-                        '"No requests yet"',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ]),
+              SvgPicture.asset(
+                'assets/icons/void.svg',
+                height: 150,
+                width: 150,
+              ),
               SizedBox(
                 height: 10,
               ),
-              MaterialButton(
-                height: 50,
-                minWidth: 150,
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SearchPage()));
-                },
-                child: Text("🔎  Find People"),
-                color: Color.fromRGBO(159, 140, 251, 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(28)),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+              Text("Empty like a Void",
+                  style: TextStyle(fontStyle: FontStyle.italic)),
             ],
           ),
-        ),
-      ),
-    );
+        );
+      }
+      return ProfileCardStack(
+        item: widget._list.elementAt(index - 1),
+        index: index - 1,
+        callBack: (value) {
+          if (value == Swipe.right) {
+            print("Right!");
+          } else {
+            print("Left!");
+          }
+        },
+      );
+    });
+
+    return Padding(
+        padding: const EdgeInsets.only(right: 18.0, left: 18, top: 70),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(28),
+              ),
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height * 0.5,
+                maxHeight: MediaQuery.of(context).size.height * 0.6,
+              ),
+              child: Stack(
+                children: _cards,
+              ),
+            ),
+            MaterialButton(
+                height: 50,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50)),
+                minWidth: 150,
+                child: Text("🔎  Find People"),
+                color: Color.fromRGBO(157, 171, 255, 1),
+                onPressed: () {})
+          ],
+        ));
   }
 }

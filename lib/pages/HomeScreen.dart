@@ -76,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
       ),
       body: widget._children[_selectedIndex],
-      backgroundColor: Colors.white,
     );
   }
 }

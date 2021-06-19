@@ -42,7 +42,7 @@ class _GateKeeperState extends State<GateKeeper> {
 
   @override
   Widget build(BuildContext context) {
-    if (signedState == SignedState.signedIn) {
+    if (signedState == SignedState.signedIn && signedState != null) {
       if (user.uid != null) {
         return HomeScreen();
       } else {

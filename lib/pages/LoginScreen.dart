@@ -42,12 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Text(
               "No Faces",
               style: TextStyle(
-                  // fontWeight: FontWeight.bold,
-                  letterSpacing: 2.3,
-                  wordSpacing: -5,
-                  fontSize: 45,
-                  fontWeight: FontWeight.bold,
-                  foreground: Paint()..shader = widget.linearGradient),
+                // fontWeight: FontWeight.bold,
+                letterSpacing: 2.3,
+                wordSpacing: -5,
+                fontSize: 45,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                // foreground: Paint()..shader = widget.linearGradient
+              ),
             ),
           ),
           decoration: new ShapeDecoration(
