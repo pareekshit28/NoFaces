@@ -1,22 +1,31 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:no_faces/Services.dart';
+import 'package:no_faces/SharedResources.dart';
+import 'package:no_faces/networking/QueryBaseHelper.dart';
+import 'package:no_faces/pages/InterestsScreen.dart';
+import 'package:no_faces/viewmodels/OnBoardingViewModel.dart';
 
 class OnBoarding extends StatefulWidget {
-  final Services _services = Services();
-  final User _user = FirebaseAuth.instance.currentUser;
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _bioController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-
   @override
   _OnBoardingState createState() => _OnBoardingState();
 }
 
 class _OnBoardingState extends State<OnBoarding> {
   String _gender;
+  final OnBoardingViewModel _viewModel = OnBoardingViewModel();
+  final User _user = FirebaseAuth.instance.currentUser;
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final QueryBaseHelper _helper = QueryBaseHelper();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _helper.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +88,10 @@ class _OnBoardingState extends State<OnBoarding> {
                       height: 60,
                     ),
                     TextField(
-                      controller: widget._nameController,
+                      controller: _nameController,
                       cursorColor: Colors.purple,
+                      textCapitalization: TextCapitalization.words,
+                      keyboardType: TextInputType.name,
                       style: TextStyle(color: Colors.grey[800], fontSize: 22),
                       decoration: InputDecoration(
                         prefixIcon: Icon(
@@ -118,7 +129,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     Expanded(
                       flex: 3,
                       child: TextField(
-                        controller: widget._ageController,
+                        controller: _ageController,
                         cursorColor: Colors.purple,
                         keyboardType: TextInputType.number,
                         style: TextStyle(color: Colors.grey[800], fontSize: 22),
@@ -155,8 +166,10 @@ class _OnBoardingState extends State<OnBoarding> {
                     Expanded(
                       flex: 5,
                       child: TextField(
-                        controller: widget._cityController,
+                        controller: _cityController,
                         cursorColor: Colors.purple,
+                        textCapitalization: TextCapitalization.words,
+                        keyboardType: TextInputType.streetAddress,
                         style: TextStyle(color: Colors.grey[800], fontSize: 22),
                         decoration: InputDecoration(
                           prefixIcon: Icon(
@@ -196,7 +209,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     size: 30,
                     color: Color.fromRGBO(157, 171, 255, 1),
                   ),
-                  items: widget._services.getGenderDropdownItems(),
+                  items: _viewModel.getGenderDropdownItems(),
                   value: _gender,
                   isExpanded: true,
                   onChanged: (value) {
@@ -242,36 +255,6 @@ class _OnBoardingState extends State<OnBoarding> {
                   ),
                 ),
                 SizedBox(
-                  height: 30,
-                ),
-                TextField(
-                  controller: widget._bioController,
-                  maxLines: 7,
-                  keyboardType: TextInputType.multiline,
-                  cursorColor: Colors.purple,
-                  style: TextStyle(color: Colors.grey[800], fontSize: 22),
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    labelText: 'Bio',
-                    labelStyle: TextStyle(
-                      color: Color.fromRGBO(157, 171, 255, 1),
-                      fontWeight: FontWeight.w300,
-                      fontSize: 20,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromRGBO(178, 36, 239, 1), width: 1.25),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromRGBO(157, 171, 255, 1)),
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                ),
-                SizedBox(
                   height: 20,
                 ),
                 Align(
@@ -280,13 +263,21 @@ class _OnBoardingState extends State<OnBoarding> {
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
-                    onPressed: () {
-                      widget._services.submitOnBoarding(
-                          3.toString(),
-                          widget._nameController.text,
-                          int.parse(widget._ageController.text),
-                          widget._cityController.text,
-                          widget._bioController.text);
+                    onPressed: () async {
+                      var response = await _viewModel.submitOnBoarding(
+                          _user.uid,
+                          _nameController.text,
+                          int.parse(_ageController.text),
+                          _cityController.text,
+                          _gender,
+                          _user.email);
+
+                      if (response != null) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                            CupertinoPageRoute(
+                                builder: (context) => InterestsScreen()),
+                            (route) => false);
+                      }
                     },
                     child: Text("Next"),
                     color: Color.fromRGBO(117, 121, 255, 1),

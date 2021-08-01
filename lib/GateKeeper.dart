@@ -1,9 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:no_faces/models/UserProfileModel.dart';
+import 'package:no_faces/networking/QueryBaseHelper.dart';
+import 'package:no_faces/pages/BioPage.dart';
 import 'package:no_faces/pages/HomeScreen.dart';
+import 'package:no_faces/pages/InterestsScreen.dart';
 import 'package:no_faces/pages/LoginScreen.dart';
 import 'package:no_faces/pages/OnBoarding.dart';
+import 'package:no_faces/pages/PreferencesScreen.dart';
+import 'package:no_faces/pages/SplashScreen.dart';
+import 'package:no_faces/repos/UsersTableRepo.dart';
 
 enum SignedState { signedIn, notSignedIn }
 
@@ -15,8 +22,11 @@ class GateKeeper extends StatefulWidget {
 class _GateKeeperState extends State<GateKeeper> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final UsersTableRepo _usersTableRepo = UsersTableRepo();
+  final QueryBaseHelper _helper = QueryBaseHelper();
   User user;
   SignedState signedState;
+  Widget _toPage;
   @override
   void initState() {
     super.initState();
@@ -40,16 +50,57 @@ class _GateKeeperState extends State<GateKeeper> {
     });
   }
 
+  void fetchPage() async {
+    var response = await _usersTableRepo.fetchProfile(user.uid);
+    if (response.isEmpty) {
+      setState(() {
+        _toPage = OnBoarding();
+      });
+    } else {
+      UserProfileModel model = UserProfileModel.fromRow(response.elementAt(0));
+      if (model.interests == null) {
+        setState(() {
+          _toPage = InterestsScreen();
+        });
+      } else if (model.bio == null) {
+        setState(() {
+          _toPage = BioPage();
+        });
+      } else if (model.showMe == null ||
+          model.startAge == null ||
+          model.endAge == null) {
+        setState(() {
+          _toPage = PreferencesScreen();
+        });
+      } else {
+        setState(() {
+          _toPage = HomeScreen();
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (signedState == SignedState.signedIn && signedState != null) {
+    if (signedState == SignedState.signedIn) {
       if (user.uid != null) {
-        return HomeScreen();
+        if (_toPage != null) {
+          return _toPage;
+        } else {
+          fetchPage();
+          return SplashScreen();
+        }
       } else {
-        return Center(child: CircularProgressIndicator());
+        return SplashScreen();
       }
     } else {
       return LoginScreen();
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _helper.dispose();
   }
 }

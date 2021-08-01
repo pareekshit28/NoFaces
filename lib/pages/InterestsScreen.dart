@@ -1,5 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:no_faces/GateKeeper.dart';
+import 'package:no_faces/networking/QueryBaseHelper.dart';
+import 'package:no_faces/pages/BioPage.dart';
+import 'package:no_faces/viewmodels/InterestsViewModel.dart';
+import 'package:textfield_tags/textfield_tags.dart';
 
 class InterestsScreen extends StatefulWidget {
   @override
@@ -7,99 +13,78 @@ class InterestsScreen extends StatefulWidget {
 }
 
 class _InterestsScreenState extends State<InterestsScreen> {
-  List<Map<String, dynamic>> list = [
-    {"label": Text("👋 Hi"), "selected": false},
-    {"label": Text("✨ Sparkle"), "selected": false},
-    {"label": Text("❤ Love"), "selected": false},
-    {"label": Text("💩 Poop"), "selected": false},
-    {"label": Text("😂 Laughing"), "selected": false},
-    {"label": Text("🍺 Beer"), "selected": false},
-    {"label": Text("😭 Crying"), "selected": false},
-    {"label": Text("🎥 Film"), "selected": false},
-    {"label": Text("🎶 Music"), "selected": false},
-    {"label": Text("🤳 Selfie"), "selected": false}
-  ];
+  final InterestsViewModel _viewModel = InterestsViewModel();
+  final User _user = FirebaseAuth.instance.currentUser;
+  final List<String> tags = [];
+  final QueryBaseHelper _helper = QueryBaseHelper();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _helper.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<ChoiceChip> widgetList = [];
-    list.forEach((element) {
-      widgetList.add(
-        ChoiceChip(
-          onSelected: (value) {
-            setState(() {
-              element["selected"] = value;
-            });
-          },
-          disabledColor: Colors.purple[50],
-          selectedColor: Colors.purple[400],
-          label: element["label"],
-          selected: element["selected"],
-          labelStyle: TextStyle(
-              color: element["selected"] ? Colors.white : Colors.black,
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-              letterSpacing: 1),
-        ),
-      );
-    });
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 10,
-          title: Text("Interests"),
-        ),
-        body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 30.0),
-            child: Column(
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 10,
-                  itemBuilder: (context, index) => Padding(
-                    padding:
-                        const EdgeInsets.only(top: 16.0, right: 7, left: 13),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Basic Interests",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Wrap(
-                          spacing: 5,
-                          children: widgetList,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                MaterialButton(
-                  height: 50,
-                  minWidth: 150,
-                  onPressed: () {},
-                  child: Icon(
-                    CupertinoIcons.arrow_right,
-                    color: Colors.white,
-                  ),
-                  color: Colors.purple,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Enter few tags that\ndefine YOU.",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              TextFieldTags(
+                  tagsStyler: TagsStyler(
+                      tagTextPadding: EdgeInsets.all(4),
+                      tagTextStyle: TextStyle(color: Colors.black),
+                      tagCancelIcon: Icon(
+                        Icons.clear,
+                        color: Colors.black,
+                      ),
+                      tagDecoration: BoxDecoration(color: Colors.grey)),
+                  textFieldStyler: TextFieldStyler(
+                      helperText: "Enter tags seperated by comma ( , )",
+                      hintText: "Enter tags"),
+                  onTag: (value) {
+                    tags.add(value);
+                  },
+                  onDelete: (value) {
+                    tags.remove(value);
+                  }),
+              Spacer(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: MaterialButton(
+                  onPressed: () async {
+                    var response =
+                        await _viewModel.updateInterests(_user.uid, tags);
+                    if (response) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          CupertinoPageRoute(builder: (context) => BioPage()),
+                          (route) => false);
+                    }
+                  },
+                  textColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28)),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text("Next"),
+                  color: Color.fromRGBO(117, 121, 255, 1),
                 ),
-              ],
-            ),
+              )
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

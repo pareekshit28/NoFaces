@@ -1,11 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:no_faces/networking/QueryBaseHelper.dart';
 import 'package:no_faces/pages/Favorites.dart';
+import 'package:no_faces/pages/LikesPage.dart';
 import 'package:no_faces/pages/ProfileScreen.dart';
 import 'package:no_faces/pages/Today.dart';
 
 class HomeScreen extends StatefulWidget {
-  final List<Widget> _children = [Today(), Favorites(), ProfileScreen()];
+  final List<Widget> _children = [
+    Today(),
+    LikesPage(),
+    Favorites(),
+    ProfileScreen()
+  ];
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -13,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  final QueryBaseHelper _helper = QueryBaseHelper();
 
   void _onItemTapped(int index) {
     setState(() {
@@ -21,11 +29,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _helper.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     const curveHeight = 55.0;
 
     return Scaffold(
-      appBar: _selectedIndex != 2
+      appBar: _selectedIndex != 3
           ? AppBar(
               toolbarHeight: 40,
               flexibleSpace: Container(
@@ -59,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : null,
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromRGBO(20, 20, 20, 1),
         unselectedItemColor: Color.fromRGBO(100, 100, 100, 1),
         selectedItemColor: Colors.white,
@@ -68,7 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.amp_stories_rounded, size: 30), label: "Today"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_rounded, size: 30), label: "Favorites"),
+              icon: Icon(Icons.favorite_rounded, size: 30), label: "Likes"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.chat_bubble_rounded, size: 30), label: "Chats"),
           BottomNavigationBarItem(
               icon: Icon(Icons.person, size: 30), label: "Profile")
         ],

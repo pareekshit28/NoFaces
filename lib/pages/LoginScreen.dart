@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:no_faces/GateKeeper.dart';
 import 'package:no_faces/pages/HomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -205,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
     await signInWithGoogle().then((value) {
       _loading = false;
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => GateKeeper()),
           (route) => false);
     });
   }
