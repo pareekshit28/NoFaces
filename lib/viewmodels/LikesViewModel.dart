@@ -20,11 +20,11 @@ class LikesViewModel extends ChangeNotifier {
         return ProfileCardStack(
           profile: UserProfileModel.fromRow(response.elementAt(index - 1)),
           index: index - 1,
-          callBack: (value, toUid) async {
+          callBack: (value, fromUid) async {
             if (value == Swipe.right) {
-              await _likesTableRepo.accept(uid, toUid);
+              await _likesTableRepo.accept(fromUid, uid);
             } else {
-              await _dislikeTableRepo.disLike(uid, toUid);
+              await _dislikeTableRepo.disLike(uid, fromUid);
             }
           },
         );
