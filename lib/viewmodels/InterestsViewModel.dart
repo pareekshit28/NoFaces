@@ -1,13 +1,36 @@
+import 'package:flutter/material.dart';
 import 'package:no_faces/repos/UsersTableRepo.dart';
-import 'package:postgresql2/postgresql.dart';
 
-class InterestsViewModel {
-  final UsersTableRepo _usersTableRepo = UsersTableRepo();
+class InterestsViewModel extends ChangeNotifier {
+  final _usersTableRepo = UsersTableRepo();
+  List<String> tags;
 
-  Future<List<Row>> fetchInterests(String uid) async {
+  void fetchInterests(String uid) async {
     var response = await _usersTableRepo.fetchInterests(uid);
-    print(response);
-    return response;
+    var temp = <String>[];
+    if (response != null && response.first[0] != null) {
+      for (var item in response.first[0]) {
+        temp.add(item);
+      }
+    }
+
+    tags = temp;
+    notifyListeners();
+  }
+
+  void setNull() {
+    tags = null;
+    notifyListeners();
+  }
+
+  void add(String value) {
+    tags.add(value);
+    notifyListeners();
+  }
+
+  void remove(String value) {
+    tags.remove(value);
+    notifyListeners();
   }
 
   Future<bool> updateInterests(String uid, List<String> interests) async {

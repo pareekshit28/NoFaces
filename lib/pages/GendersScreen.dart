@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:no_faces/SharedResources.dart';
-import 'package:no_faces/SharedResources.dart';
 import 'package:no_faces/viewmodels/PreferencesViewModel.dart';
-import 'package:provider/provider.dart';
 
 typedef BoolValue = Function(bool);
 

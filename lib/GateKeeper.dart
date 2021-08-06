@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:no_faces/models/UserProfileModel.dart';
-import 'package:no_faces/networking/QueryBaseHelper.dart';
 import 'package:no_faces/pages/BioPage.dart';
 import 'package:no_faces/pages/HomeScreen.dart';
 import 'package:no_faces/pages/InterestsScreen.dart';
@@ -23,10 +22,10 @@ class _GateKeeperState extends State<GateKeeper> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final UsersTableRepo _usersTableRepo = UsersTableRepo();
-  final QueryBaseHelper _helper = QueryBaseHelper();
   User user;
   SignedState signedState;
   Widget _toPage;
+
   @override
   void initState() {
     super.initState();
@@ -54,23 +53,23 @@ class _GateKeeperState extends State<GateKeeper> {
     var response = await _usersTableRepo.fetchProfile(user.uid);
     if (response.isEmpty) {
       setState(() {
-        _toPage = OnBoarding();
+        _toPage = OnBoarding(false);
       });
     } else {
       UserProfileModel model = UserProfileModel.fromRow(response.elementAt(0));
       if (model.interests == null) {
         setState(() {
-          _toPage = InterestsScreen();
+          _toPage = InterestsScreen(false);
         });
       } else if (model.bio == null) {
         setState(() {
-          _toPage = BioPage();
+          _toPage = BioPage(false);
         });
       } else if (model.showMe == null ||
           model.startAge == null ||
           model.endAge == null) {
         setState(() {
-          _toPage = PreferencesScreen();
+          _toPage = PreferencesScreen(false);
         });
       } else {
         setState(() {
@@ -96,11 +95,5 @@ class _GateKeeperState extends State<GateKeeper> {
     } else {
       return LoginScreen();
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _helper.dispose();
   }
 }

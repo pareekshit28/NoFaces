@@ -1,14 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:no_faces/models/UserProfileModel.dart';
-import 'package:no_faces/networking/QueryBaseHelper.dart';
-import 'package:no_faces/pages/GendersScreen.dart';
+import 'package:no_faces/SharedResources.dart';
+import 'package:no_faces/pages/BioPage.dart';
 import 'package:no_faces/pages/InterestsScreen.dart';
-import 'package:no_faces/pages/LoginScreen.dart';
 import 'package:no_faces/pages/OnBoarding.dart';
-import 'package:no_faces/repos/UsersTableRepo.dart';
+import 'package:no_faces/pages/PreferencesScreen.dart';
 import 'package:no_faces/viewmodels/ProfileViewModel.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +14,21 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  var uid = SharedResources.getCurrentUser().uid;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() {
+    Provider.of<ProfileViewModel>(context, listen: false).fetchProfile(uid);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final _viewModel = ProfileViewModel();
     return Consumer<ProfileViewModel>(builder:
         (BuildContext context, ProfileViewModel viewModel, Widget child) {
       return SafeArea(
@@ -70,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           icon: Icon(Icons.edit_outlined),
                           onPressed: () => Navigator.of(context).push(
                               CupertinoPageRoute(
-                                  builder: (context) => OnBoarding()))),
+                                  builder: (context) => OnBoarding(true)))),
                     ]),
                   ),
                 ),
@@ -95,7 +101,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(CupertinoPageRoute(
+                              builder: (context) => InterestsScreen(true)));
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -132,7 +141,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(CupertinoPageRoute(
+                              builder: (context) => BioPage(true)));
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -169,7 +181,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(CupertinoPageRoute(
+                              builder: (context) => PreferencesScreen(true)));
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -203,14 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8)))),
                       onPressed: () {
-                        _auth
-                            .signOut()
-                            .then((value) => _googleSignIn.signOut())
-                            .then((value) => Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginScreen()),
-                                ((Route route) => false)));
+                        _viewModel.signOut(context);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -247,7 +255,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8)))),
-                      onPressed: () {},
+                      onPressed: () {
+                        _viewModel.deleteProfile(context);
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [

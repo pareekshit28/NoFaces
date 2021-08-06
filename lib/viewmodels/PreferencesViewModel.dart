@@ -4,18 +4,12 @@ import 'package:no_faces/networking/QueryBaseHelper.dart';
 import 'package:no_faces/repos/UsersTableRepo.dart';
 
 class PreferencesViewModel extends ChangeNotifier {
-  final UsersTableRepo _usersTableRepo = UsersTableRepo();
-  final QueryBaseHelper _helper = QueryBaseHelper();
+  final _usersTableRepo = UsersTableRepo();
+  final _helper = QueryBaseHelper();
+  var uid = SharedResources.getCurrentUser().uid;
   Map<String, bool> showMe = SharedResources.genderMap;
   int startAge;
   int endAge;
-
-  PreferencesViewModel() {
-    var uid = SharedResources.getCurrentUser().uid;
-    fetchShowMe(uid);
-    fetchStartAge(uid);
-    fetchEndAge(uid);
-  }
 
   void fetchShowMe(String uid) async {
     var response = await _usersTableRepo.fetchShowMe(uid);
@@ -46,6 +40,12 @@ class PreferencesViewModel extends ChangeNotifier {
       }
     }
     return result;
+  }
+
+  void setNull() {
+    startAge = null;
+    endAge = null;
+    notifyListeners();
   }
 
   void fetchStartAge(String uid) async {

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
@@ -9,7 +8,7 @@ import 'package:no_faces/models/UserProfileModel.dart';
 
 enum Swipe { right, left }
 
-typedef SwipeCallBack = Function(Swipe);
+typedef SwipeCallBack = Function(Swipe, String);
 typedef Empty = Function(bool);
 
 class ProfileCardStack extends StatefulWidget {
@@ -159,10 +158,10 @@ class _ProfileCardStackState extends State<ProfileCardStack> {
         ),
       ),
       onSwipeRight: (value) {
-        widget.callBack(Swipe.right);
+        widget.callBack(Swipe.right, widget.profile.uid);
       },
       onSwipeLeft: (value) {
-        widget.callBack(Swipe.left);
+        widget.callBack(Swipe.left, widget.profile.uid);
       },
     );
   }

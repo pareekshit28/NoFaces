@@ -4,16 +4,14 @@ import 'package:no_faces/components/VoidWidget.dart';
 import 'package:no_faces/models/UserProfileModel.dart';
 import 'package:no_faces/repos/DislikesTableRepo.dart';
 import 'package:no_faces/repos/LikesTableRepo.dart';
-import 'package:no_faces/repos/UsersTableRepo.dart';
 
-class TodayViewModel extends ChangeNotifier {
+class LikesViewModel extends ChangeNotifier {
   List<Widget> cards = [Center(child: VoidWidget())];
-  final UsersTableRepo _usersTableRepo = UsersTableRepo();
   final _likesTableRepo = LikesTableRepo();
   final _dislikeTableRepo = DislikeTableRepo();
 
-  void fetchRecommendations(String uid) async {
-    var response = await _usersTableRepo.fetchRecommendations(uid);
+  void fetchLikes(String uid) async {
+    var response = await _likesTableRepo.fetchLikes(uid);
     if (response != null) {
       cards = List<Widget>.generate(response.length + 1, (index) {
         if (index == 0) {
@@ -24,7 +22,7 @@ class TodayViewModel extends ChangeNotifier {
           index: index - 1,
           callBack: (value, toUid) async {
             if (value == Swipe.right) {
-              await _likesTableRepo.like(uid, toUid);
+              await _likesTableRepo.accept(uid, toUid);
             } else {
               await _dislikeTableRepo.disLike(uid, toUid);
             }

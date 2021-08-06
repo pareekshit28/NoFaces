@@ -1,18 +1,29 @@
+import 'package:flutter/cupertino.dart';
 import 'package:no_faces/repos/UsersTableRepo.dart';
-import 'package:postgresql2/postgresql.dart';
 
-class BioViewModel {
+class BioViewModel extends ChangeNotifier {
   final UsersTableRepo _usersTableRepo = UsersTableRepo();
+  String bio;
 
-  Future<List<Row>> fetchBio(String uid) async {
+  void fetchBio(String uid) async {
     var response = await _usersTableRepo.fetchBio(uid);
-    print(response);
-    return response;
+    if (response != null) {
+      bio = response.first[0];
+    }
+    notifyListeners();
   }
 
-  Future<List<Row>> updateBio(String uid, String bio) async {
+  void setNull() {
+    bio = null;
+    notifyListeners();
+  }
+
+  Future<bool> updateBio(String uid, String bio) async {
+    var result = false;
     var response = await _usersTableRepo.updateBio(uid, bio);
-    print(response);
-    return response;
+    if (response != null) {
+      result = true;
+    }
+    return result;
   }
 }

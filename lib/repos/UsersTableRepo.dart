@@ -1,4 +1,3 @@
-import 'package:no_faces/models/UserProfileModel.dart';
 import 'package:no_faces/networking/QueryBaseHelper.dart';
 import 'package:postgresql2/postgresql.dart';
 
@@ -8,14 +7,18 @@ class UsersTableRepo {
   Future<List<Row>> fetchProfile(String uid) async {
     var response =
         await _helper.rawQuery("Select * from users where uid='$uid'");
-
     return response;
   }
 
-  Future<List<Row>> fetchAllProfiles(String uid) async {
-    var response =
-        await _helper.rawQuery("Select * from users where uid!='$uid'");
+  Future<List<Row>> fetchRecommendations(String uid) async {
+    var response = await _helper.rawQuery(
+        "select * from users where uid != '$uid' and gender in (select unnest(showme) from users where uid = '$uid') and (age between (select startage from users where uid = '$uid') and (select endage from users where uid = '$uid')) and uid not in (select touid from likes where fromuid = '$uid') and uid not in (select touid from dislikes where fromuid = '$uid')");
+    return response;
+  }
 
+  Future<List<Row>> deleteProfile(String uid) async {
+    var response =
+        await _helper.rawQuery("delete from users where uid = '$uid'");
     return response;
   }
 
@@ -30,7 +33,7 @@ class UsersTableRepo {
   Future<List<Row>> updateOnBoarding(String uid, String displayName, int age,
       String city, String gender) async {
     var response = await _helper.rawQuery(
-        "Update users set displayName='$displayName',age=$age,city='$city',gender='$gender', where uid = '$uid'");
+        "Update users set displayname='$displayName',age=$age,city='$city',gender='$gender' where uid = '$uid'");
     return response;
   }
 
@@ -53,17 +56,23 @@ class UsersTableRepo {
   }
 
   Future<List<Row>> updateInterests(String uid, List<String> interests) async {
-    String temp = "[";
-    for (int i = 0; i < interests.length; i++) {
-      temp = temp + "'" + interests.elementAt(i) + "'";
-      if (i != interests.length - 1) {
-        temp = temp + ",";
+    if (interests == null) {
+      var response = await _helper
+          .rawQuery("Update users set interests=null where uid='$uid'");
+      return response;
+    } else {
+      String temp = "[";
+      for (int i = 0; i < interests.length; i++) {
+        temp = temp + "'" + interests.elementAt(i) + "'";
+        if (i != interests.length - 1) {
+          temp = temp + ",";
+        }
       }
+      temp = temp + "]";
+      var response = await _helper
+          .rawQuery("Update users set interests=array$temp where uid='$uid'");
+      return response;
     }
-    temp = temp + "]";
-    var response = await _helper
-        .rawQuery("Update users set interests=array$temp where uid='$uid'");
-    return response;
   }
 
   Future<List<Row>> fetchShowMe(String uid) async {

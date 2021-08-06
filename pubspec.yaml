@@ -36,7 +36,6 @@ dependencies:
   provider: ^5.0.0
   flutter_swipable: ^0.1.1
   flutter_dotenv: ^5.0.0
-  textfield_tags: ^1.4.0
 
 dev_dependencies:
   flutter_test:
