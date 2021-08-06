@@ -62,7 +62,7 @@ class _OnBoardingState extends State<OnBoarding> {
         _gender = viewModel.profile.gender;
       }
       return Scaffold(
-        appBar: viewModel.genders != null && viewModel.profile != null
+        appBar: viewModel.genders != null
             ? AppBar(
                 toolbarHeight: 50,
                 automaticallyImplyLeading: false,
@@ -93,7 +93,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
               )
             : null,
-        body: viewModel.genders != null && viewModel.profile != null
+        body: viewModel.genders != null
             ? Scrollbar(
                 child: SingleChildScrollView(
                   child: Container(

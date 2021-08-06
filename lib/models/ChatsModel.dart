@@ -13,7 +13,8 @@ class ChatsModel {
     this.fromUid = snapshot.get("fromuid");
     this.toUid = snapshot.get("touid");
     this.content = snapshot.get("content");
-    this.sentTime = snapshot.get("senttime");
+    this.sentTime = DateTime.fromMillisecondsSinceEpoch(
+        snapshot.get("senttime").millisecondsSinceEpoch);
     this.read = snapshot.get("read");
   }
 }

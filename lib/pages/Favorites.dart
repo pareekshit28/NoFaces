@@ -49,6 +49,7 @@ class _FavoritesState extends State<Favorites> {
                                 name: viewModel.profiles
                                     .elementAt(index)
                                     .displayName,
+                                toUid: viewModel.profiles.elementAt(index).uid,
                               )));
                     },
                     child: Padding(

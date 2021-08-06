@@ -12,7 +12,7 @@ class UsersTableRepo {
 
   Future<List<Row>> fetchRecommendations(String uid) async {
     var response = await _helper.rawQuery(
-        "select * from users where uid != '$uid' and gender in (select unnest(showme) from users where uid = '$uid') and (age between (select startage from users where uid = '$uid') and (select endage from users where uid = '$uid')) and uid not in (select touid from likes where fromuid = '$uid') and uid not in (select touid from dislikes where fromuid = '$uid')");
+        "select * from users where uid != '$uid' and gender in (select unnest(showme) from users where uid = '$uid') and (age between (select startage from users where uid = '$uid') and (select endage from users where uid = '$uid')) and uid not in (select touid from likes where fromuid = '$uid') and uid not in (select fromuid from likes where touid = '$uid') and uid not in (select touid from dislikes where fromuid = '$uid')");
     return response;
   }
 

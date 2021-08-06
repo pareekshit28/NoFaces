@@ -22,7 +22,7 @@ class OnBoardingViewModel extends ChangeNotifier {
 
   void fetchUserProfile(String uid) async {
     var response = await _usersTableRepo.fetchProfile(uid);
-    if (response != null) {
+    if (response != null && response.length > 0) {
       profile = UserProfileModel.fromRow(response.first);
     }
     notifyListeners();

@@ -2,19 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:no_faces/SharedResources.dart';
 import 'package:no_faces/models/ChatsModel.dart';
+import 'package:no_faces/viewmodels/ChatsViewModel.dart';
 
 class ChatScreen extends StatefulWidget {
   final int id;
   final String name;
+  final String toUid;
 
-  const ChatScreen({this.id, this.name});
+  const ChatScreen({this.id, this.name, this.toUid});
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final db = FirebaseFirestore.instance.doc("chats");
+  final db = FirebaseFirestore.instance.collection("data").doc("chats");
   final uid = SharedResources.getCurrentUser().uid;
+  final _viewModel = ChatsViewModel();
+  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,106 +100,121 @@ class _ChatScreenState extends State<ChatScreen> {
                   .orderBy("senttime", descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
+                snapshot.hasData ? print(snapshot.data.docs) : print("error");
                 return snapshot.hasData
                     ? snapshot.data.docs.length > 0
-                        ? ListView.builder(
-                            reverse: true,
-                            itemCount: snapshot.data.size,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              var chat = ChatsModel.fromSnapshot(
-                                  snapshot.data.docs.elementAt(index));
-                              return Container(
-                                margin: EdgeInsets.only(
-                                    top: 15, right: 12, left: 12),
-                                child: Align(
-                                  alignment: chat.fromUid == uid
-                                      ? Alignment.topRight
-                                      : Alignment.topLeft,
-                                  child: Column(
-                                    crossAxisAlignment: chat.fromUid == uid
-                                        ? CrossAxisAlignment.end
-                                        : CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        constraints: BoxConstraints(
-                                          maxWidth: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.8,
-                                        ),
-                                        decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: chat.fromUid == uid
-                                                  ? [
-                                                      Color.fromRGBO(
-                                                          244, 157, 159, 1),
-                                                      Color.fromRGBO(
-                                                          252, 188, 210, 1)
-                                                    ]
-                                                  : [
-                                                      Color.fromRGBO(
-                                                          106, 181, 249, 1),
-                                                      Color.fromRGBO(
-                                                          159, 140, 251, 1)
-                                                    ],
-                                            ),
-                                            borderRadius: chat.fromUid == uid
-                                                ? BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(20),
-                                                    bottomLeft:
-                                                        Radius.circular(20),
-                                                    bottomRight:
-                                                        Radius.circular(5),
-                                                    topRight:
-                                                        Radius.circular(20))
-                                                : BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(20),
-                                                    bottomLeft:
-                                                        Radius.circular(5),
-                                                    topRight:
-                                                        Radius.circular(20),
-                                                    bottomRight:
-                                                        Radius.circular(20))),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                chat.content,
-                                                style:
-                                                    TextStyle(fontSize: 15.5),
+                        ? Column(
+                            children: [
+                              Spacer(),
+                              ListView.builder(
+                                  reverse: true,
+                                  itemCount: snapshot.data.size,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    var chat = ChatsModel.fromSnapshot(
+                                        snapshot.data.docs.elementAt(index));
+                                    return Container(
+                                      margin: EdgeInsets.only(
+                                          top: 15, right: 12, left: 12),
+                                      child: Align(
+                                        alignment: chat.fromUid == uid
+                                            ? Alignment.topRight
+                                            : Alignment.topLeft,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              chat.fromUid == uid
+                                                  ? CrossAxisAlignment.end
+                                                  : CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.8,
                                               ),
-                                            ],
-                                          ),
+                                              decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: chat.fromUid == uid
+                                                        ? [
+                                                            Color.fromRGBO(244,
+                                                                157, 159, 1),
+                                                            Color.fromRGBO(252,
+                                                                188, 210, 1)
+                                                          ]
+                                                        : [
+                                                            Color.fromRGBO(106,
+                                                                181, 249, 1),
+                                                            Color.fromRGBO(159,
+                                                                140, 251, 1)
+                                                          ],
+                                                  ),
+                                                  borderRadius: chat.fromUid == uid
+                                                      ? BorderRadius.only(
+                                                          topLeft: Radius.circular(
+                                                              20),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  20),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  5),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  20))
+                                                      : BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  20),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  5),
+                                                          topRight:
+                                                              Radius.circular(20),
+                                                          bottomRight: Radius.circular(20))),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15.0),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      chat.content,
+                                                      style: TextStyle(
+                                                          fontSize: 15.5),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                                margin: EdgeInsets.only(
+                                                    top: 5, right: 7, left: 7),
+                                                alignment: chat.fromUid == uid
+                                                    ? Alignment.bottomRight
+                                                    : Alignment.bottomLeft,
+                                                child: Text(
+                                                  chat.sentTime.hour
+                                                          .toString() +
+                                                      ":" +
+                                                      chat.sentTime.minute
+                                                          .toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 12.5,
+                                                      color:
+                                                          Colors.blueGrey[700]),
+                                                )),
+                                            index == 0
+                                                ? SizedBox(
+                                                    height: 90,
+                                                  )
+                                                : SizedBox()
+                                          ],
                                         ),
                                       ),
-                                      Container(
-                                          margin: EdgeInsets.only(
-                                              top: 5, right: 7, left: 7),
-                                          alignment: chat.fromUid == uid
-                                              ? Alignment.bottomRight
-                                              : Alignment.bottomLeft,
-                                          child: Text(
-                                            chat.sentTime.hour.toString() +
-                                                ":" +
-                                                chat.sentTime.minute.toString(),
-                                            style: TextStyle(
-                                                fontSize: 12.5,
-                                                color: Colors.blueGrey[700]),
-                                          )),
-                                      index == 0
-                                          ? SizedBox(
-                                              height: 90,
-                                            )
-                                          : SizedBox()
-                                    ],
-                                  ),
-                                ),
-                              );
-                            })
+                                    );
+                                  }),
+                            ],
+                          )
                         : Center(
                             child: Text("Start a Conversation"),
                           )
@@ -216,6 +235,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(15.0, 15, 5, 15),
                     child: TextField(
+                      controller: _controller,
                       maxLines: null,
                       scrollPadding: EdgeInsets.all(5),
                       keyboardType: TextInputType.multiline,
@@ -246,7 +266,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _viewModel.sendChat(
+                              widget.id, uid, widget.toUid, _controller.text);
+                          _controller.clear();
+                        },
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(2, 0, 0, 0),
                           child: Icon(
