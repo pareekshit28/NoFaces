@@ -28,6 +28,7 @@ class _OnBoardingState extends State<OnBoarding> {
   final _nameController = TextEditingController();
   final _helper = QueryBaseHelper();
   final uid = SharedResources.getCurrentUser().uid;
+  bool loading = false;
 
   @override
   void initState() {
@@ -310,6 +311,9 @@ class _OnBoardingState extends State<OnBoarding> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             onPressed: () async {
+                              setState(() {
+                                loading = true;
+                              });
                               if (widget.update) {
                                 var response = await viewModel.updateOnBoarding(
                                     _user.uid,
@@ -322,6 +326,10 @@ class _OnBoardingState extends State<OnBoarding> {
                                     .setNull();
                                 if (response) {
                                   Navigator.of(context).pop();
+                                } else {
+                                  setState(() {
+                                    loading = false;
+                                  });
                                 }
                               } else {
                                 var response = await viewModel.submitOnBoarding(
@@ -343,8 +351,17 @@ class _OnBoardingState extends State<OnBoarding> {
                                 }
                               }
                             },
-                            child:
-                                widget.update ? Text("Update") : Text("Next"),
+                            child: loading
+                                ? SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    ))
+                                : widget.update
+                                    ? Text("Update")
+                                    : Text("Next"),
                             color: Color.fromRGBO(117, 121, 255, 1),
                           ),
                         )

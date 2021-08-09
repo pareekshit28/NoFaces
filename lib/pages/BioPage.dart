@@ -20,6 +20,7 @@ class _BioPageState extends State<BioPage> {
   final _bioController = TextEditingController();
   final uid = SharedResources.getCurrentUser().uid;
   bool lock = false;
+  bool loading = false;
 
   @override
   void initState() {
@@ -74,6 +75,7 @@ class _BioPageState extends State<BioPage> {
                             onPressed: () async {
                               setState(() {
                                 lock = true;
+                                loading = true;
                               });
                               FocusScope.of(context).unfocus();
                               var response = await viewModel.updateBio(
@@ -89,13 +91,26 @@ class _BioPageState extends State<BioPage> {
                                             builder: (context) =>
                                                 PreferencesScreen(false)),
                                         (route) => false);
+                              } else {
+                                setState(() {
+                                  loading = false;
+                                });
                               }
                             },
                             textColor: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            child:
-                                widget.update ? Text("Update") : Text("Next"),
+                            child: loading
+                                ? SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    ))
+                                : widget.update
+                                    ? Text("Update")
+                                    : Text("Next"),
                             color: Color.fromRGBO(117, 121, 255, 1),
                           ),
                         )

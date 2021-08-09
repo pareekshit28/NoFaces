@@ -22,6 +22,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
   var uid = SharedResources.getCurrentUser().uid;
   List<String> tags;
   final _controller = TextEditingController();
+  bool loading = false;
 
   @override
   void initState() {
@@ -116,6 +117,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                           alignment: Alignment.centerRight,
                           child: MaterialButton(
                             onPressed: () async {
+                              setState(() {
+                                loading = true;
+                              });
                               FocusScope.of(context).unfocus();
                               var response = await viewModel.updateInterests(
                                   _user.uid, tags.isEmpty ? null : tags);
@@ -130,13 +134,26 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                             builder: (context) =>
                                                 BioPage(false)),
                                         (route) => false);
+                              } else {
+                                setState(() {
+                                  loading = false;
+                                });
                               }
                             },
                             textColor: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            child:
-                                widget.update ? Text("Update") : Text("Next"),
+                            child: loading
+                                ? SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 2,
+                                    ))
+                                : widget.update
+                                    ? Text("Update")
+                                    : Text("Next"),
                             color: Color.fromRGBO(117, 121, 255, 1),
                           ),
                         )
