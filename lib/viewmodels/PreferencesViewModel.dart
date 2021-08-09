@@ -13,7 +13,7 @@ class PreferencesViewModel extends ChangeNotifier {
 
   void fetchShowMe(String uid) async {
     var response = await _usersTableRepo.fetchShowMe(uid);
-    if (response.first[0] != null) {
+    if (response != null && response.first[0] != null) {
       var temp = SharedResources.genderMap;
       for (var item in response.first[0]) {
         temp[item.toString()] = true;
@@ -50,7 +50,7 @@ class PreferencesViewModel extends ChangeNotifier {
 
   void fetchStartAge(String uid) async {
     var response = await _usersTableRepo.fetchStartAge(uid);
-    if (response.first[0] != null) {
+    if (response != null && response.first[0] != null) {
       startAge = response.first[0];
     } else {
       var response =
@@ -71,7 +71,7 @@ class PreferencesViewModel extends ChangeNotifier {
 
   void fetchEndAge(String uid) async {
     var response = await _usersTableRepo.fetchEndAge(uid);
-    if (response.first[0] != null) {
+    if (response != null && response.first[0] != null) {
       endAge = response.first[0];
     } else {
       var response =

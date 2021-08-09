@@ -8,7 +8,7 @@ class BioViewModel extends ChangeNotifier {
   void fetchBio(String uid) async {
     var response = await _usersTableRepo.fetchBio(uid);
     if (response != null) {
-      bio = response.first[0];
+      bio = response.first[0] == null ? "" : response.first[0];
     }
     notifyListeners();
   }
