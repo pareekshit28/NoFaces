@@ -33,7 +33,7 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   void initState() {
     super.initState();
-    init();
+    Future.delayed(Duration(milliseconds: 100), () => init());
   }
 
   @override
@@ -57,13 +57,15 @@ class _OnBoardingState extends State<OnBoarding> {
       if (_gender == null &&
           viewModel.genders != null &&
           viewModel.profile != null) {
-        _ageController.text = viewModel.profile.age.toString();
+        _ageController.text = viewModel.profile.age.toString() == "0"
+            ? ""
+            : viewModel.profile.age.toString();
         _cityController.text = viewModel.profile.city.toString();
         _nameController.text = viewModel.profile.displayName.toString();
         _gender = viewModel.profile.gender;
       }
       return Scaffold(
-        appBar: viewModel.genders != null
+        appBar: viewModel.genders != null && viewModel.profile != null
             ? AppBar(
                 toolbarHeight: 50,
                 automaticallyImplyLeading: false,
@@ -94,7 +96,7 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
               )
             : null,
-        body: viewModel.genders != null
+        body: viewModel.genders != null && viewModel.profile != null
             ? Scrollbar(
                 child: SingleChildScrollView(
                   child: Container(

@@ -7,7 +7,7 @@ import 'package:no_faces/repos/LikesTableRepo.dart';
 import 'package:no_faces/repos/UsersTableRepo.dart';
 
 class TodayViewModel extends ChangeNotifier {
-  List<Widget> cards = [Center(child: VoidWidget())];
+  List<Widget> cards;
   final UsersTableRepo _usersTableRepo = UsersTableRepo();
   final _likesTableRepo = LikesTableRepo();
   final _dislikeTableRepo = DislikeTableRepo();
@@ -31,7 +31,14 @@ class TodayViewModel extends ChangeNotifier {
           },
         );
       });
-      notifyListeners();
+    } else {
+      cards = [Center(child: VoidWidget())];
     }
+    notifyListeners();
+  }
+
+  void setNull() {
+    cards = null;
+    notifyListeners();
   }
 }

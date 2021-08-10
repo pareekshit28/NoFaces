@@ -15,10 +15,11 @@ class _LikesPageState extends State<LikesPage> {
   @override
   void initState() {
     super.initState();
-    init();
+    Future.delayed(Duration(milliseconds: 100), () => init());
   }
 
   void init() {
+    Provider.of<LikesViewModel>(context, listen: false).setNull();
     Provider.of<LikesViewModel>(context, listen: false).fetchLikes(uid);
   }
 
@@ -26,16 +27,20 @@ class _LikesPageState extends State<LikesPage> {
   Widget build(BuildContext context) {
     return Consumer<LikesViewModel>(builder:
         (BuildContext context, LikesViewModel viewModel, Widget child) {
-      return Padding(
-        padding: const EdgeInsets.only(
-          left: 18.0,
-          right: 18,
-          top: 40,
-        ),
-        child: Stack(
-          children: viewModel.cards,
-        ),
-      );
+      return viewModel.cards != null
+          ? Padding(
+              padding: const EdgeInsets.only(
+                left: 18.0,
+                right: 18,
+                top: 40,
+              ),
+              child: Stack(
+                children: viewModel.cards,
+              ),
+            )
+          : Center(
+              child: CircularProgressIndicator(),
+            );
     });
   }
 }

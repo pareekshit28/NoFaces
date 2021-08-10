@@ -44,6 +44,13 @@ class UserProfileModel {
     showMe = row[11];
   }
 
+  UserProfileModel.fromNull() {
+    displayName = "";
+    age = 0;
+    city = "";
+    gender = "";
+  }
+
   @override
   String toString() {
     List temp = [

@@ -4,28 +4,34 @@ import 'package:no_faces/models/FavoriteProfileModel.dart';
 import 'package:no_faces/repos/LikesTableRepo.dart';
 
 class FavoritesViewModel extends ChangeNotifier {
-  List<FavoriteProfileModel> profiles = [];
+  List<FavoriteProfileModel> profiles;
   final _likesTableRepo = LikesTableRepo();
   final db = FirebaseFirestore.instance.collection("data").doc("chats");
 
   void fetchChats(String uid) async {
     var response = await _likesTableRepo.fetchChats(uid);
+    print(response.first);
     if (response != null) {
       List<FavoriteProfileModel> temp = [];
-      for (var item in response) {
+      for (int i = 0; i < response.length; i++) {
         String subTitle = "Say Hi";
         var ref = await db
-            .collection(item[0].toString())
+            .collection(response.elementAt(i)[0].toString())
             .orderBy("senttime", descending: true)
             .limit(1)
             .get();
         if (ref != null && ref.size > 0) {
           subTitle = ref.docs.elementAt(0)["content"];
         }
-        temp.add(FavoriteProfileModel.fromRow(response.first, subTitle));
+        temp.add(FavoriteProfileModel.fromRow(response.elementAt(i), subTitle));
       }
       profiles = temp;
-      notifyListeners();
     }
+    notifyListeners();
+  }
+
+  void setNull() {
+    profiles = null;
+    notifyListeners();
   }
 }

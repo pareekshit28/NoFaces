@@ -15,10 +15,11 @@ class _TodayState extends State<Today> {
   @override
   void initState() {
     super.initState();
-    init();
+    Future.delayed(Duration(milliseconds: 100), () => init());
   }
 
   void init() {
+    Provider.of<TodayViewModel>(context, listen: false).setNull();
     Provider.of<TodayViewModel>(context, listen: false)
         .fetchRecommendations(uid);
   }
@@ -27,16 +28,18 @@ class _TodayState extends State<Today> {
   Widget build(BuildContext context) {
     return Consumer<TodayViewModel>(builder:
         (BuildContext context, TodayViewModel viewModel, Widget child) {
-      return Padding(
-        padding: const EdgeInsets.only(
-          left: 18.0,
-          right: 18,
-          top: 40,
-        ),
-        child: Stack(
-          children: viewModel.cards,
-        ),
-      );
+      return viewModel.cards != null
+          ? Padding(
+              padding: const EdgeInsets.only(
+                left: 18.0,
+                right: 18,
+                top: 40,
+              ),
+              child: Stack(
+                children: viewModel.cards,
+              ),
+            )
+          : Center(child: CircularProgressIndicator());
     });
   }
 }
