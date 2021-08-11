@@ -33,7 +33,7 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () => init());
+    Future.delayed(Duration(milliseconds: 10), () => init());
   }
 
   @override

@@ -9,9 +9,10 @@ class FavoritesViewModel extends ChangeNotifier {
   final db = FirebaseFirestore.instance.collection("data").doc("chats");
 
   void fetchChats(String uid) async {
+    profiles = null;
+    notifyListeners();
     var response = await _likesTableRepo.fetchChats(uid);
-    print(response.first);
-    if (response != null) {
+    if (response != null && response.length > 0) {
       List<FavoriteProfileModel> temp = [];
       for (int i = 0; i < response.length; i++) {
         String subTitle = "Say Hi";
@@ -26,6 +27,8 @@ class FavoritesViewModel extends ChangeNotifier {
         temp.add(FavoriteProfileModel.fromRow(response.elementAt(i), subTitle));
       }
       profiles = temp;
+    } else {
+      profiles = [];
     }
     notifyListeners();
   }

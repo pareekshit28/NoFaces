@@ -25,7 +25,7 @@ class _BioPageState extends State<BioPage> {
   @override
   void initState() {
     super.initState();
-    init();
+    Future.delayed(Duration(milliseconds: 10), () => init());
   }
 
   @override

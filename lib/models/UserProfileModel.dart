@@ -48,7 +48,7 @@ class UserProfileModel {
     displayName = "";
     age = 0;
     city = "";
-    gender = "";
+    gender = null;
   }
 
   @override

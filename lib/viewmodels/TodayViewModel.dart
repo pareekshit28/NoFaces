@@ -13,6 +13,8 @@ class TodayViewModel extends ChangeNotifier {
   final _dislikeTableRepo = DislikeTableRepo();
 
   void fetchRecommendations(String uid) async {
+    cards = null;
+    notifyListeners();
     var response = await _usersTableRepo.fetchRecommendations(uid);
     if (response != null) {
       cards = List<Widget>.generate(response.length + 1, (index) {

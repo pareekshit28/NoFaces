@@ -38,6 +38,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   IconButton(
                     onPressed: () {
+                      widget.callback();
                       Navigator.pop(context);
                     },
                     icon: Icon(

@@ -15,11 +15,10 @@ class _LikesPageState extends State<LikesPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () => init());
+    Future.delayed(Duration(milliseconds: 10), () => init());
   }
 
   void init() {
-    Provider.of<LikesViewModel>(context, listen: false).setNull();
     Provider.of<LikesViewModel>(context, listen: false).fetchLikes(uid);
   }
 
