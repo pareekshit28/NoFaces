@@ -15,11 +15,10 @@ class _TodayState extends State<Today> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () => init());
+    Future.delayed(Duration(milliseconds: 10), () => init());
   }
 
   void init() {
-    Provider.of<TodayViewModel>(context, listen: false).setNull();
     Provider.of<TodayViewModel>(context, listen: false)
         .fetchRecommendations(uid);
   }

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.techtotality.no_faces">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="no_faces"
         android:icon="@mipmap/ic_launcher">

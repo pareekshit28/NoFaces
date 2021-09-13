@@ -6,6 +6,8 @@ class InterestsViewModel extends ChangeNotifier {
   List<String> tags;
 
   void fetchInterests(String uid) async {
+    tags = null;
+    notifyListeners();
     var response = await _usersTableRepo.fetchInterests(uid);
     var temp = <String>[];
     if (response != null && response.first[0] != null) {

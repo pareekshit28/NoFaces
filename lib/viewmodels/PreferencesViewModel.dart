@@ -49,6 +49,8 @@ class PreferencesViewModel extends ChangeNotifier {
   }
 
   void fetchStartAge(String uid) async {
+    startAge = null;
+    notifyListeners();
     var response = await _usersTableRepo.fetchStartAge(uid);
     if (response != null && response.first[0] != null) {
       startAge = response.first[0];
@@ -70,6 +72,8 @@ class PreferencesViewModel extends ChangeNotifier {
   }
 
   void fetchEndAge(String uid) async {
+    endAge = null;
+    notifyListeners();
     var response = await _usersTableRepo.fetchEndAge(uid);
     if (response != null && response.first[0] != null) {
       endAge = response.first[0];

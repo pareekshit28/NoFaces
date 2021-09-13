@@ -17,11 +17,10 @@ class _FavoritesState extends State<Favorites> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () => init());
+    Future.delayed(Duration(milliseconds: 10), () => init());
   }
 
   void init() {
-    Provider.of<FavoritesViewModel>(context, listen: false).setNull();
     Provider.of<FavoritesViewModel>(context, listen: false).fetchChats(uid);
   }
 
