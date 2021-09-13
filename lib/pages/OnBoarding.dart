@@ -359,7 +359,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                     width: 20,
                                     child: CircularProgressIndicator(
                                       color: Colors.white,
-                                      strokeWidth: 2,
+                                      strokeWidth: 1,
                                     ))
                                 : widget.update
                                     ? Text("Update")
