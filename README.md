@@ -90,6 +90,8 @@ NoFaces consists of 10 screens:
 ### Tools Used
 ---
 
-Flutter: UI toolkit for cross platform app development
+Flutter: UI toolkit for cross platform app development 
+
 PostgreSQL: Primary database
+
 Firebase: Authentication and real-time database
