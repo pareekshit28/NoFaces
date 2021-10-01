@@ -65,6 +65,7 @@ private. With this users will focus more on interests rather than physical appea
  </table>	
 </p>
 
+
 ### Abstract
 ---
 
@@ -85,3 +86,10 @@ NoFaces consists of 10 screens:
 - Favorites Screen   – List of Friends and chats
 - Profile Screen     – Display/edit user details
 - Chat Screen        – All the chatting is done here
+
+### Tools Used
+---
+
+Flutter: UI toolkit for cross platform app development
+PostgreSQL: Primary database
+Firebase: Authentication and real-time database
