@@ -33,9 +33,9 @@ private. With this users will focus more on interests rather than physical appea
 	  <td><b>Add Details Screen</b></td>
   </tr>
   <tr>
-    <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/LoginScreen.jpg" width=300 height=630></td>
-    <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/mainScreen.jpg" width=300 height=630></td>
-    <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/DetailScreen.jpg" width=300 height=630></td>
+    <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/LoginScreen.jpg" width=320 height=570></td>
+    <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/mainScreen.jpg" width=320 height=570></td>
+    <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/DetailScreen.jpg" width=320 height=570></td>
   </tr>
 		
   <tr>
