@@ -59,7 +59,7 @@ private. With this users will focus more on interests rather than physical appea
   <tr>
     <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/tags.jpg" width=320 height=570></td>	
     <td><img src="https://github.com/TheGreatFellow/NoFaces/blob/main/Screens/SettingScreen.jpg" width=320 height=570></td>
-    <td><img src="https://github.com/NakamotoSans/Screens/blob/main/IMG_20210725_150832.jpg" width=320 height=570></td>
+
     
   </tr>	
  </table>	
