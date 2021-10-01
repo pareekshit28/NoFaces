@@ -21,6 +21,8 @@ anonymity, profile pictures are not included, instead a randomly generated avata
 be assigned, Hence the name, NoFaces. If the users prefer, they can share it later, in
 private. With this users will focus more on interests rather than physical appearances.
 
+Download and install the app on your device to try it out for yourself: 
+[No Faces APK](https://drive.google.com/drive/folders/1g_wLm8hLHVKxA1YaPVRn1jNNa1z0FAWJ?usp=sharing)
 
 ### UI Screenshots
 
